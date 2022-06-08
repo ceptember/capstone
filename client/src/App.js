@@ -1,13 +1,18 @@
 
 import logo from './logo.svg';
+
+import React from 'react'
 import './App.css';
 import Header from './Header';
 import Home from './Home';
 import About from './About';
 import Login from './Login'; 
 import Footer from './Footer';
+import { useEffect } from 'react';
 
 function App() {
+
+
   return (
     <div className="App">
       <header className="App-header">
@@ -16,11 +21,12 @@ function App() {
 
     <Header />
 
+
     {/* need routing  */}
 
-    <Home />
-    {/* <About /> */}
-    <Login /> 
+    <Home /> 
+    <About />
+     <Login /> 
 
     <Footer />
 

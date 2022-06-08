@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 
 function Login (){
 
@@ -8,9 +8,44 @@ function Login (){
     const [newPassword, setNewPassword] = useState("")
     const [newConfirmPassword, setNewConfirmPassword] = useState("")
 
+    const [testUsers, setTestUsers] = useState("no")
+   
+    //testing server connection, delete this later
+    useEffect(()=>{
+        fetch("http://localhost:3000/users")
+            .then( r =>  r.json())
+            .then( data => setTestUsers(data.hello)) 
+    }, [])
+
+    function handleSignup(e){
+        e.preventDefault()
+
+        let newUserObj = {
+            email: newEmail,
+            username: newUsername, 
+            password: newPassword,
+            password_confirmation: newConfirmPassword
+        }
+
+       
+
+        fetch('http://localhost:3000/signup', {
+            method: 'POST',
+            headers:  { "Content-Type": "application/json"},
+            body: JSON.stringify(newUserObj)
+        })
+            .then(resp => resp.json())
+            .then(data =>  console.log(newUserObj))
+
+        setNewEmail("")
+        setNewUsername("")
+        setNewPassword("")
+        setNewConfirmPassword("")
+    }
 
     return (
         <div>
+            <h1>{testUsers}</h1>
             Existing Users Log In
             <form>
                 Email: <input></input> <br />
@@ -23,7 +58,7 @@ function Login (){
             New Users Sign Up
             <br />
 
-                <form>
+                <form onSubmit={e => handleSignup(e)}>
                     {/* First Name: <input value={newFirstName} onChange={e=> setNewFirstName(e.target.value)}></input> {newFirstName} <br />
                     Last Name: <input></input> <br /> */}
                     Username: <input value={newUsername} onChange={e => setNewUsername(e.target.value)}></input> {newUsername}<br />
