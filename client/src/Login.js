@@ -2,20 +2,56 @@ import { useState, useEffect } from 'react'
 
 function Login (){
 
-    // const [newFirstName, setNewFirstName] = useState("")
+    //for login
+    const [username, setUsername] = useState("")
+    const [password, setPassword] = useState("")
+
+    //for signup
     const [newEmail, setNewEmail] = useState("")
     const [newUsername, setNewUsername ] = useState("")
     const [newPassword, setNewPassword] = useState("")
     const [newConfirmPassword, setNewConfirmPassword] = useState("")
-
-    const [testUsers, setTestUsers] = useState("no")
    
-    //testing server connection, delete this later
-    useEffect(()=>{
-        fetch("http://localhost:3000/users")
-            .then( r =>  r.json())
-            .then( data => setTestUsers(data.hello)) 
-    }, [])
+    const [user, setUser] = useState(null);
+
+    useEffect(() => {
+      fetch("/me").then((response) => {
+        if (response.ok) {
+          response.json().then((data) => setUser(data));
+        // response.json().then(data => console.log(data))
+        }
+      });
+    }, []);
+
+    //Login function 
+
+    function submitLogin (e){
+        e.preventDefault(); 
+        fetch("/login", {
+          method: "POST", 
+          headers: {"Content-Type": "application/json"},
+          body: JSON.stringify({username, password})
+        }).then( (r) => {
+            if (r.ok) {
+              r.json().then((data) => {
+                setUser(data)
+                setUsername("")
+                setPassword("")
+              });
+            } else {
+              r.json().then((err) => {
+                console.log(err)
+              });
+            }
+        }) 
+      }
+
+      function handleLogout(){
+        fetch("/logout",{
+          method: "DELETE"
+        })
+        .then(setUser(null))
+      }
 
     function handleSignup(e){
         e.preventDefault()
@@ -26,8 +62,6 @@ function Login (){
             password: newPassword,
             password_confirmation: newConfirmPassword
         }
-
-       
 
         fetch('http://localhost:3000/signup', {
             method: 'POST',
@@ -45,14 +79,16 @@ function Login (){
 
     return (
         <div>
-            <h1>{testUsers}</h1>
+            <h2>  {user ? "Welcome, " + user.username + "!": ""}</h2>
             Existing Users Log In
-            <form>
-                Email: <input></input> <br />
-                Password: <input></input> <br />
+            <form onSubmit={e => submitLogin(e)}>
+                Username: <input value={username} onChange={ e => setUsername(e.target.value)}></input> <br />
+                Password: <input value={password} onChange={e => setPassword(e.target.value)}></input> <br />
                 forgot password? <br />
                 <input type ="submit"></input>
             </form>
+
+            <button onClick={handleLogout}>Logout</button>
 
             <br />
             New Users Sign Up
