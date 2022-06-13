@@ -6,7 +6,15 @@
 #   movies = Movie.create([{ name: "Star Wars" }, { name: "Lord of the Rings" }])
 #   Character.create(name: "Luke", movie: movies.first)
 
+#info = scrape.article_info
+#Article.create_article(info)
+
+puts "Seeding..."
 scrape = Scraper.new 
-info = scrape.article_info
-Article.create_article(info)
+puts "scrape created"
+articles_array = scrape.art
+puts "articles array created. Items:  " 
+puts "adding to db..."
+Article.create(articles_array)
+puts "done"
 
