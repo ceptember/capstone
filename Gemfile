@@ -47,6 +47,7 @@ gem "bootsnap", require: false
 gem 'rack-cors'
 gem 'nokogiri'
 gem 'pry'
+gem 'active_model_serializers'
 
 # Use Sass to process CSS
 # gem "sassc-rails"

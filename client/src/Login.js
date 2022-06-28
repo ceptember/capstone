@@ -12,16 +12,15 @@ function Login (){
     const [newPassword, setNewPassword] = useState("")
     const [newConfirmPassword, setNewConfirmPassword] = useState("")
    
-    const [user, setUser] = useState(null);
+    //const [user, setUser] = useState(null); //this is duplicated, move to store 
 
-    useEffect(() => {
-      fetch("/me").then((response) => {
-        if (response.ok) {
-          response.json().then((data) => setUser(data));
-        // response.json().then(data => console.log(data))
-        }
-      });
-    }, []);
+    // useEffect(() => {
+    //   fetch("/me").then((response) => {
+    //     if (response.ok) {
+    //       response.json().then((data) => setUser(data));
+    //     }
+    //   });
+    // }, []);
 
     //Login function 
 
@@ -34,7 +33,7 @@ function Login (){
         }).then( (r) => {
             if (r.ok) {
               r.json().then((data) => {
-                setUser(data)
+              //  setUser(data)
                 setUsername("")
                 setPassword("")
               });
@@ -50,7 +49,7 @@ function Login (){
         fetch("/logout",{
           method: "DELETE"
         })
-        .then(setUser(null))
+     //   .then(setUser(null))
       }
 
     function handleSignup(e){
@@ -79,7 +78,7 @@ function Login (){
 
     return (
         <div>
-            <h2>  {user ? "Welcome, " + user.username + "!": ""}</h2>
+            {/* <h2>  {user ? "Welcome, " + user.username + "!": ""}</h2> */}
             Existing Users Log In
             <form onSubmit={e => submitLogin(e)}>
                 Username: <input value={username} onChange={ e => setUsername(e.target.value)}></input> <br />

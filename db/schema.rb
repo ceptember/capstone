@@ -10,16 +10,25 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_06_09_141351) do
+ActiveRecord::Schema[7.0].define(version: 2022_06_15_153253) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "articles", force: :cascade do |t|
     t.string "headline"
-    t.string "authors"
+    t.string "authors", default: [], array: true
     t.string "source_url"
     t.string "date"
-    t.string "content"
+    t.string "content", default: [], array: true
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "comments", force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "article_id"
+    t.string "comment_text"
+    t.integer "likes", default: [], array: true
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

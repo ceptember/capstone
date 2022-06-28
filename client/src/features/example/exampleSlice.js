@@ -1,0 +1,40 @@
+const initialState = {
+    items: [],
+    myStateThing: "",
+    user: null
+  };
+  
+  // Action Creators 
+  export function sayBoo(saying) {
+    return { type: "ghost/haunt",
+            payload: saying };
+  }
+
+  // Reducer 
+
+  // get the payload with action.payload 
+
+  function exampleReducer(state = initialState, action) {
+    switch (action.type) {
+      case "count/increment":
+        return {
+          ...state,
+          items: state.items.concat(state.items.length + 1),
+        };
+       case "ghost/haunt":
+        return {
+            ...state, 
+            myStateThing: action.payload
+        }
+
+        case "user/login":
+            return{
+                ...state
+            }
+
+      default:
+        return state;
+    }
+  }
+  
+  export default exampleReducer;
