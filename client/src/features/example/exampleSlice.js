@@ -10,6 +10,11 @@ const initialState = {
             payload: saying };
   }
 
+  export function storeUser(user) {
+    return { type: "user/login",
+            payload: user };
+  }
+
   // Reducer 
 
   // get the payload with action.payload 
@@ -29,7 +34,8 @@ const initialState = {
 
         case "user/login":
             return{
-                ...state
+                ...state,
+                user: action.payload
             }
 
       default:

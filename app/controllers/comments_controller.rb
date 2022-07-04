@@ -26,13 +26,19 @@ class CommentsController < ApplicationController
     end 
 
     def update 
-
+        comment = Comment.find_by(id: params[:id])
+        if comment 
+            comment.update(comment_params)
+            render json: comment, status: :ok 
+        else 
+            render json: { error: "Comment not found" }, status: :not_found
+        end 
     end 
 
     private 
 
     def comment_params
-        params.permit(:user_id, :article_id, :comment_text)
+        params.permit(:user_id, :article_id, :comment_text, :likes, :id)
     end 
 
 end

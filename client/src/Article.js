@@ -7,6 +7,7 @@ function Article({article}){
 
     const [authors, setAuthors] = useState("")
     const [newComment, setNewComment] = useState("")
+    const [comments, setComments] = useState(article.comments)
 
     const [user, setUser] = useState(null); //this is duplicated, move to store 
 
@@ -18,7 +19,6 @@ function Article({article}){
       });
     }, []);
 
-
     useEffect( ()=>{
        
     }, [])
@@ -26,7 +26,6 @@ function Article({article}){
     function handleSubmitComment(e){
         e.preventDefault()
        
-
         let commentObj = {
             user_id: user.id,
             article_id: article.id,
@@ -39,7 +38,9 @@ function Article({article}){
             body: JSON.stringify(commentObj)
         })
             .then(resp => resp.json())
-            .then(data => {})
+            .then(data => {
+                setComments([...comments, data])
+            }) 
         setNewComment("")
     }
 
@@ -54,10 +55,7 @@ function Article({article}){
     
             <h3>Comments</h3> 
 
-            {/* {article.comments ? article.comments.map( x => <p key={x.id}>{x.comment_text}  </p>  ) : ''} */}
-
-            {article.comments ? article.comments.map( x => <Comment key={x.id} comment_id={x.id} /> ) : ''}
-
+            {comments ? comments.map( x => <Comment key={x.id} comment_id={x.id} /> ) : ''}
 
             <form onSubmit={e => handleSubmitComment(e)}>
                 <textarea value={newComment} onChange={e => setNewComment(e.target.value)}></textarea>

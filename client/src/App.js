@@ -18,6 +18,7 @@ import { useDispatch, useSelector } from "react-redux";
 
 //Redux Action Creators
 import { sayBoo } from './features/example/exampleSlice';
+import { storeUser } from './features/example/exampleSlice'
 
 function App() {
 
@@ -34,25 +35,28 @@ function App() {
 
 // Testing out the redux store 
   // read from the Redux store
-  const items = useSelector((state) => state.items);
-  const thing = useSelector((state) => state.myStateThing)
+  // const items = useSelector((state) => state.items);
+  const thing = useSelector((state) => state.myStateThing) //getting this from the store 
+  const userFromStore = useSelector((state) => state.user) //getting this from the store 
+
 
   const [user, setUser] = useState(null); //change to redux store 
 
   // gives us the dispatch function to send actions to the Redux store
   const dispatch = useDispatch();
 
-
-
   function handleOnClick() {
     // dispatching an action on click
-    dispatch(sayBoo("Boo!"));
+    dispatch(sayBoo("Boo!")); // in the slice, sets myStateThing to the payload "Boo!"
   }
 
   useEffect(() => {
     fetch("/me").then((response) => {
       if (response.ok) {
-        response.json().then((data) => setUser(data)); //add a dispach here 
+        response.json().then((data) => {
+          setUser(data) 
+          dispatch(storeUser(data))
+        }); //add a dispach here 
       }
     });
   }, []);
@@ -68,6 +72,7 @@ function App() {
         <h1>FROM STORE:</h1>
       <button onClick={handleOnClick}>Click</button>
       <p>{thing}</p>
+      <p>FROM STORE: {userFromStore ? userFromStore.username : ""} !!!! </p>
     </div>
 
     <Header />
