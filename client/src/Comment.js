@@ -1,43 +1,46 @@
 import React from "react";
 import {useEffect, useState} from 'react'
 import { useDispatch, useSelector } from "react-redux"; 
-
+import EditComment from "./EditComment";
 
 function Comment({comment_id}){
 
     const [commentObj, setCommentObj] = useState({})
+    const [commentUsername, setCommentUsername] = useState("")
+    const [canEdit, setCanEdit] = useState(false)
+    const [editing, setEditing] = useState(false)
 
+    const userFromStore = useSelector((state) => state.user) //getting this from the store 
+    const usernameFromStore = useSelector((state) => state.user.username)
+
+    // get comments 
     useEffect( ()=>{
         fetch('/comments/' + comment_id)
             .then( resp => resp.json() )
             .then (data => {
-                setCommentObj(data)})
+                setCommentObj(data)
+                setCommentUsername(data.user.username)
+            })
     }, [] )
-  
-    // function submitLike(){
 
-    //     let patchObj = {
-    //        // likes: [...commentObj.likes, "placeholder user"]
-    //        //comment_text: "blahhh"
-    //        likes: ["blah"]
-    //     }
+    function closeEditForm(){
+        setEditing(false)
+    }
 
-    //     fetch("/comments/"+commentObj.id, { 
-    //         method: "PATCH",
-    //         headers: {"Content-Type": "application/json"},
-    //         body: JSON.stringify(patchObj)
-    //     })
-    //         .then(resp => resp.json())
-    //         .then(data => console.log(data.likes))
-    // }
+    function handleEditComment(editedComment){
+        setCommentObj(editedComment)
+    }
 
     return(
         <div className="comment_box">
             {commentObj.comment_text ? commentObj.comment_text : "" }
             <br />
-            ~{commentObj.user ? commentObj.user.username : "" }
+            ~{ commentUsername }
             <br /> 
             {/* <button onClick={submitLike}>Like</button> */}
+            {/* <p>Current user from store: {usernameFromStore}</p> */}
+            <p> { commentUsername == usernameFromStore ? <button onClick={()=>setEditing(true)}>edit</button>: " " } </p>
+           { editing ? <EditComment comment={commentObj} closeEditForm={closeEditForm} handleEditComment={handleEditComment} /> : ""}
         </div>
     )
 }
