@@ -19,10 +19,6 @@ function Article({article}){
       });
     }, []);
 
-    useEffect( ()=>{
-       
-    }, [])
-    
     function handleSubmitComment(e){
         e.preventDefault()
        
@@ -44,6 +40,18 @@ function Article({article}){
         setNewComment("")
     }
 
+    function deleteComment(comment_id){
+        
+        fetch("/comments/"+comment_id,{
+            method: "DELETE"
+        })
+        .then( () => {
+            let otherComments = comments.filter( c => c.id != comment_id)
+            setComments(otherComments)
+        })
+
+    }
+
     return (
         <div> 
             <h2>{article.headline}</h2>
@@ -55,7 +63,7 @@ function Article({article}){
     
             <h3>Comments</h3> 
 
-            {comments ? comments.map( x => <Comment key={x.id} comment_id={x.id} /> ) : ''}
+            {comments ? comments.map( x => <Comment key={x.id} comment_id={x.id} deleteComment={deleteComment} /> ) : ''}
 
             <form onSubmit={e => handleSubmitComment(e)}>
                 <textarea value={newComment} onChange={e => setNewComment(e.target.value)}></textarea>
