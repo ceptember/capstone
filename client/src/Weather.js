@@ -100,9 +100,12 @@ function handleWeather(){
         }
     }
 
-    function handleSearchCity(){
+    function handleSearchCity(e,city){
       //  setSearchZip(e.target.value)
-        console.log("!")
+        console.log("clicked")
+        console.log(e.target.id)
+        setZipcode(e.target.id)
+        setUrlGeo(`https://geocoding-api.open-meteo.com/v1/search?name=${e.target.id}`)
 
     }
 
@@ -136,7 +139,9 @@ function handleWeather(){
                 <input onChange={ (e) => listCities(e)} ></input>
             </form>
             {cityName}
-            { cityResults ? cityResults.map( x => <li key={x.id}> {x.name}, {x.admin1} { x.postcodes[0] } <button onClick={ () => setUrlGeo(`https://geocoding-api.open-meteo.com/v1/search?name=${x.postcodes[0]}`)} >search {x.postcodes[0]}</button> </li>) : ""}
+            {/* { cityResults ? cityResults.map( x => <li key={x.id}> {x.name}, {x.admin1} { x.postcodes[0] } <button onClick={ () => setUrlGeo(`https://geocoding-api.open-meteo.com/v1/search?name=${x.postcodes[0]}`)} >search {x.postcodes[0]}</button> </li>) : ""} */}
+
+            { cityResults ? cityResults.map( x => <li key={x.id}> {x.name}, {x.admin1} { x.postcodes[0] } <button id={x.postcodes[0]} onClick={ (e) => handleSearchCity(e)} >search {x.postcodes[0]}</button> </li>) : ""}
 
 
             <br />
