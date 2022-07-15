@@ -9,6 +9,7 @@ import About from './About';
 import Login from './Login'; 
 import Footer from './Footer';
 import Article from './Article';
+import Weather from './Weather';
 import { useEffect, useState } from 'react';
 
 import { BrowserRouter, Route } from "react-router-dom";
@@ -80,6 +81,7 @@ function App() {
     <Route exact path="/"> <Home />  </Route>
     <Route path="/login"> <Login />  </Route>
     <Route path="/about"><About /> </Route>
+    <Route path="/weather"><Weather /> </Route>
     <Footer />
     </div>
   );

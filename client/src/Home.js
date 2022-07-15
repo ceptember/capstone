@@ -27,8 +27,6 @@ function Home(){
 
 
             The home page will dynamically generate previews of that day's articles. 
-           
-           
 
                { articles.length > 0 ? articles.map( x => <ArticlePreview key={x.id} article={x} /> ) : ""} 
 
