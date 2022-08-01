@@ -15,7 +15,6 @@ function Weather(){
     const [cityName, setCityName] = useState('')
     const [cityResults, setCityResults] = useState([])
 
-
     const [currentWeather, setCurrentWeather] = useState("")
     const [todayWeather, setTodayWeather] = useState("")
     const [tomorrowWeather, setTomorrowWeather] = useState("")
@@ -25,12 +24,17 @@ function Weather(){
     const [tomorrowHigh, setTomorrowHigh] = useState("")
     const [tomorrowLow, setTomorrowLow] = useState("")
 
-    function handleGeo(){
-
-    }
+    useEffect( ()=> {
+        fetch('https://ipapi.co/postal')
+          .then( resp => resp.text()) //this api gives a plain text response 
+          .then (data => {
+            setZipcode(data)
+            setUrlGeo(`https://geocoding-api.open-meteo.com/v1/search?name=${data}`)
+          })
+      }, [])
 
     useEffect( () => {
-        
+
         fetch (urlGeo)
         .then(response => response.json())
         .then(data => {
@@ -53,7 +57,6 @@ function handleWeather(){
         fetch(`https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${long}&daily=weathercode,temperature_2m_max,temperature_2m_min,sunrise,sunset&current_weather=true&temperature_unit=fahrenheit&windspeed_unit=mph&precipitation_unit=inch&timezone=${timezone}`)
             .then(resp => resp.json())
             .then(weatherData => {
-                console.log(weatherData)
                 //get weather 
                 let weathercodesNowTodayTomorrow = [weatherData.current_weather.weathercode, weatherData.daily.weathercode[0], weatherData.daily.weathercode[1]]
                 let nowTodayTomorrow = []; 
@@ -116,9 +119,7 @@ function handleWeather(){
         setSearchZip("")
     }
 
-    function checkZip(){
-
-    }
+ 
 
 //use this to search by city 
 //https://geocoding-api.open-meteo.com/v1/search?name=Berlin&count=100

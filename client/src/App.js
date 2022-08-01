@@ -30,8 +30,7 @@ function App() {
   useEffect( ()=>{
       fetch('/articles')
       .then(resp => resp.json())
-      .then(data => {
-           console.log(data[0])   
+      .then(data => { 
           setArticles(data)})
   }, [])
 
@@ -39,19 +38,14 @@ function App() {
 // Testing out the redux store 
   // read from the Redux store
   // const items = useSelector((state) => state.items);
-  const thing = useSelector((state) => state.myStateThing) //getting this from the store 
+  // const thing = useSelector((state) => state.myStateThing) //getting this from the store 
   const userFromStore = useSelector((state) => state.user) //getting this from the store 
-
 
   const [user, setUser] = useState(null); //change to redux store 
 
   // gives us the dispatch function to send actions to the Redux store
   const dispatch = useDispatch();
 
-  function handleOnClick() {
-    // dispatching an action on click
-    dispatch(sayBoo("Boo!")); // in the slice, sets myStateThing to the payload "Boo!"
-  }
 
   useEffect(() => {
     fetch("/me").then((response) => {
@@ -59,35 +53,89 @@ function App() {
         response.json().then((data) => {
           setUser(data) 
           dispatch(storeUser(data))
-        }); //add a dispach here 
+        }); 
       }
     });
   }, []);
 
+
+  // Current weather 
+
+  const [currentWeather, setCurrentWeather] = useState("")
+  const [currentTemp, setCurrentTemp] = useState("")
+  const [zipcode, setZipcode] = useState('10004') 
+  const [urlGeo, setUrlGeo] = useState(`https://geocoding-api.open-meteo.com/v1/search?name=${zipcode}`)
+  const [lat, setLat] = useState("")
+  const [long, setLong] = useState("")
+  const [timezone, setTimezone] = useState("")
+  const [city, setCity] = useState("")
+  const [usState, setUsState] = useState("")
+
+useEffect( ()=> {
+  fetch('https://ipapi.co/postal')
+    .then( resp => resp.text()) //this api gives a plain text response 
+    .then (data => {
+      setZipcode(data)
+      setUrlGeo(`https://geocoding-api.open-meteo.com/v1/search?name=${data}`)
+    })
+}, [])
+
+  useEffect( () => {
+    fetch (urlGeo)
+    .then(response => response.json())
+    .then(data => {
+        setLat(Number.parseFloat(data.results[0].latitude).toFixed(2))
+        setLong(Number.parseFloat(data.results[0].longitude).toFixed(2));
+        setTimezone(data.results[0].timezone); 
+        setCity(data.results[0].name)
+        setUsState(data.results[0].admin1)
+       
+    })
+}, [urlGeo])
+
+useEffect( () => {
+    handleWeather(); 
+    }, [lat, long])
+
+// lat and long in the API URL come from the handleGeo function that calls the weather callback 
+
+function handleWeather(){  
+    fetch(`https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${long}&daily=weathercode,temperature_2m_max,temperature_2m_min,sunrise,sunset&current_weather=true&temperature_unit=fahrenheit&windspeed_unit=mph&precipitation_unit=inch&timezone=${timezone}`)
+        .then(resp => resp.json())
+        .then(weatherData => {
+            //get weather 
+            let weatherCode = weatherData.current_weather.weathercode
+            if ([0, 1, 2].includes(weatherCode)){
+                  setCurrentWeather('clear'); 
+                }
+            else if ([3, 45, 48].includes(weatherCode)){
+                  setCurrentWeather('cloudy'); 
+                }
+            else if ([51, 53, 55, 56, 57, 61, 63, 65, 66, 67, 80, 81, 82, 95, 96, 99].includes(weatherCode)){
+                  setCurrentWeather('raining'); 
+                }
+            else if ([71, 73, 75, 77, 85, 86].includes(weatherCode)){
+                  setCurrentWeather('snowing'); 
+                }
+            setCurrentTemp(Math.round(weatherData.current_weather.temperature))
+        })  
+}
+
   return (
     <div className="App">
-      <header className="App-header">
-        Project 5
-      </header>
-
-      <div>
-        <h1> { user ? user.username : ""} </h1>
-        <h1>FROM STORE:</h1>
-      <button onClick={handleOnClick}>Click</button>
-      <p>{thing}</p>
-      <p>FROM STORE: {userFromStore ? userFromStore.username : ""} !!!! </p>
-    </div>
-
-    <Header />
+    <Header currentTemp={currentTemp} currentWeather={currentWeather} city={city} usState={usState} />
     { articles.length > 0 ? articles.map( (x) =>  <Route path={"/articles/"+x.id} key={x.id} > <Article article={x}  /></Route>) : ""} 
     <Route exact path="/"> <Home />  </Route>
     <Route path="/login"> <Login />  </Route>
     <Route path="/about"><About /> </Route>
-    <Route path="/weather"><Weather /> </Route>
+    <Route path="/weather"><Weather zip={zipcode} /> </Route>
     <Route path="/games"><Games /></Route>
     <Footer />
+
     </div>
   );
 }
 
 export default App;
+
+

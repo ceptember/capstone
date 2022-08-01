@@ -1,7 +1,8 @@
 const initialState = {
     items: [],
     myStateThing: "",
-    user: null
+    user: null, 
+    weather: null
   };
   
   // Action Creators 
@@ -26,17 +27,24 @@ const initialState = {
           ...state,
           items: state.items.concat(state.items.length + 1),
         };
-       case "ghost/haunt":
+
+      case "ghost/haunt":
         return {
-            ...state, 
-            myStateThing: action.payload
+          ...state, 
+          myStateThing: action.payload
         }
 
-        case "user/login":
-            return{
-                ...state,
-                user: action.payload
-            }
+      case "user/login":
+        return{
+          ...state,
+          user: action.payload
+        }
+
+      case "weather/check":
+        return{
+          ...state,
+          weather: action.payload
+        }
 
       default:
         return state;
