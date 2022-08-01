@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 
-function Login (){
+function Login ({handleLogout}){
 
     //for login
     const [username, setUsername] = useState("")
@@ -45,12 +45,12 @@ function Login (){
         }) 
       }
 
-      function handleLogout(){
-        fetch("/logout",{
-          method: "DELETE"
-        })
-     //   .then(setUser(null))
-      }
+      // function handleLogout(){
+      //   fetch("/logout",{
+      //     method: "DELETE"
+      //   })
+      //  .then(setUser(null))
+      // }
 
     function handleSignup(e){
         e.preventDefault()

@@ -58,6 +58,17 @@ function App() {
     });
   }, []);
 
+    // LOGOUT 
+
+    function handleLogout(){
+      fetch("/logout",{
+        method: "DELETE"
+      })
+     .then( () => {
+        setUser(null)
+        dispatch(storeUser(null))
+      })
+    }
 
   // Current weather 
 
@@ -119,14 +130,18 @@ function handleWeather(){
                 }
             setCurrentTemp(Math.round(weatherData.current_weather.temperature))
         })  
-}
+  }
+
+
+
 
   return (
     <div className="App">
     <Header currentTemp={currentTemp} currentWeather={currentWeather} city={city} usState={usState} />
     { articles.length > 0 ? articles.map( (x) =>  <Route path={"/articles/"+x.id} key={x.id} > <Article article={x}  /></Route>) : ""} 
+    {userFromStore ? userFromStore.username : ""}
     <Route exact path="/"> <Home />  </Route>
-    <Route path="/login"> <Login />  </Route>
+    <Route path="/login"> <Login handleLogout={handleLogout} />  </Route>
     <Route path="/about"><About /> </Route>
     <Route path="/weather"><Weather zip={zipcode} /> </Route>
     <Route path="/games"><Games /></Route>

@@ -34,16 +34,16 @@ function Weather(){
       }, [])
 
     useEffect( () => {
-
         fetch (urlGeo)
         .then(response => response.json())
         .then(data => {
-            setLat(Number.parseFloat(data.results[0].latitude).toFixed(2))
-            setLong(Number.parseFloat(data.results[0].longitude).toFixed(2));
-            setTimezone(data.results[0].timezone); 
-            setCity(data.results[0].name)
-            setUsState(data.results[0].admin1)
-           
+            let US_results = data.results.filter( x => x.country_code == "US")
+            let resultObj = US_results[0]
+            setLat(Number.parseFloat(resultObj.latitude).toFixed(2))
+            setLong(Number.parseFloat(resultObj.longitude).toFixed(2));
+            setTimezone(resultObj.timezone); 
+            setCity(resultObj.name)
+            setUsState(resultObj.admin1)
         })
     }, [urlGeo])
 
@@ -104,12 +104,10 @@ function handleWeather(){
     }
 
     function handleSearchCity(e,city){
-      //  setSearchZip(e.target.value)
-        console.log("clicked")
-        console.log(e.target.id)
         setZipcode(e.target.id)
         setUrlGeo(`https://geocoding-api.open-meteo.com/v1/search?name=${e.target.id}`)
-
+        document.querySelector("#cityInput").value = ""
+        setCityResults([])
     }
 
     function handleSearchZip(e){
@@ -137,9 +135,9 @@ function handleWeather(){
             </form>
             Search by U.S. city name 
             <form> 
-                <input onChange={ (e) => listCities(e)} ></input>
+                <input id="cityInput" onChange={ (e) => listCities(e)} ></input>
             </form>
-            {cityName}
+           
             {/* { cityResults ? cityResults.map( x => <li key={x.id}> {x.name}, {x.admin1} { x.postcodes[0] } <button onClick={ () => setUrlGeo(`https://geocoding-api.open-meteo.com/v1/search?name=${x.postcodes[0]}`)} >search {x.postcodes[0]}</button> </li>) : ""} */}
 
             { cityResults ? cityResults.map( x => <li key={x.id}> {x.name}, {x.admin1} { x.postcodes[0] } <button id={x.postcodes[0]} onClick={ (e) => handleSearchCity(e)} >search {x.postcodes[0]}</button> </li>) : ""}

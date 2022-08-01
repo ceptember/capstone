@@ -10,7 +10,11 @@ function Header({currentTemp, currentWeather, city, usState}){
     return (
         <div id="header_component">
             
-            <p id= "header-login-logout"> {userFromStore ? "Welcome, " + userFromStore.username + "! " : <button>Sign Up / Log in </button>}  </p>
+            <div id= "header-login-logout"> 
+                {userFromStore ? <Link className='' to={"/login"}><button>log out </button></Link> : <Link className='' to={"/login"}><button> sign up / log in </button></Link>}   
+                <br />
+                {userFromStore ? "Welcome, " + userFromStore.username + "! " : ""} 
+            </div>
             <span>{today.toDateString()}| </span>
             <span> Weather | </span>
             <span> Search bar </span>
