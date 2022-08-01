@@ -157,7 +157,7 @@ function handleWeather(){
 
   return (
     <div className="App">
-    <Header currentTemp={currentTemp} currentWeather={currentWeather} city={city} usState={usState} />
+    <Header currentTemp={currentTemp} currentWeather={currentWeather} city={city} usState={usState} handleLogout={handleLogout} />
     { articles.length > 0 ? articles.map( (x) =>  <Route path={"/articles/"+x.id} key={x.id} > <Article article={x}  /></Route>) : ""} 
     {userFromStore ? userFromStore.username : ""}
     <Route exact path="/"> <Home />  </Route>

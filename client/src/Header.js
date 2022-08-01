@@ -2,7 +2,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { storeUser } from './features/example/exampleSlice'
 import { Link} from "react-router-dom";
 
-function Header({currentTemp, currentWeather, city, usState}){
+function Header({currentTemp, currentWeather, city, usState, handleLogout}){
 
     const userFromStore = useSelector((state) => state.user) //getting this from the store 
     const today = new Date()
@@ -11,7 +11,7 @@ function Header({currentTemp, currentWeather, city, usState}){
         <div id="header_component">
             
             <div id= "header-login-logout"> 
-                {userFromStore ? <Link className='' to={"/login"}><button>log out </button></Link> : <Link className='' to={"/login"}><button> sign up / log in </button></Link>}   
+                {userFromStore ? <Link className='' to={"/login"}><button onClick={handleLogout}>log out </button></Link> : <Link className='' to={"/login"}><button> sign up / log in </button></Link>}   
                 <br />
                 {userFromStore ? "Welcome, " + userFromStore.username + "! " : ""} 
             </div>

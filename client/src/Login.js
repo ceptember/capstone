@@ -26,23 +26,6 @@ function Login ({handleLogout, submitLogin}){
 
     function handleLogin (e){
         e.preventDefault(); 
-        // fetch("/login", {
-        //   method: "POST", 
-        //   headers: {"Content-Type": "application/json"},
-        //   body: JSON.stringify({username, password})
-        // }).then( (r) => {
-        //     if (r.ok) {
-        //       r.json().then((data) => {
-        //       //  setUser(data)
-        //         setUsername("")
-        //         setPassword("")
-        //       });
-        //     } else {
-        //       r.json().then((err) => {
-        //         console.log(err)
-        //       });
-        //     }
-        // }) 
 
         submitLogin(e, username, password)
 
@@ -51,12 +34,7 @@ function Login ({handleLogout, submitLogin}){
 
       }
 
-      // function handleLogout(){
-      //   fetch("/logout",{
-      //     method: "DELETE"
-      //   })
-      //  .then(setUser(null))
-      // }
+
 
     function handleSignup(e){
         e.preventDefault()
@@ -74,7 +52,10 @@ function Login ({handleLogout, submitLogin}){
             body: JSON.stringify(newUserObj)
         })
             .then(resp => resp.json())
-            .then(data =>  console.log(newUserObj))
+            .then(data =>  {
+              console.log(newUserObj)
+              submitLogin(e, newUserObj.username, newUserObj.password)
+            })
 
         setNewEmail("")
         setNewUsername("")
@@ -100,15 +81,13 @@ function Login ({handleLogout, submitLogin}){
             <br />
 
                 <form onSubmit={e => handleSignup(e)}>
-                    {/* First Name: <input value={newFirstName} onChange={e=> setNewFirstName(e.target.value)}></input> {newFirstName} <br />
-                    Last Name: <input></input> <br /> */}
-                    Username: <input value={newUsername} onChange={e => setNewUsername(e.target.value)}></input> {newUsername}<br />
-                    Email: <input value={newEmail} onChange={e => setNewEmail(e.target.value)}></input> {newEmail} <br />
-                    Password: <input type="password" value={newPassword} onChange={ e => setNewPassword(e.target.value)}></input> {newPassword} <br />
-                    Confirm Password:  <input type="password" value={newConfirmPassword} onChange={ e => setNewConfirmPassword(e.target.value)}></input> {newConfirmPassword} 
+                    Username: <input value={newUsername} onChange={e => setNewUsername(e.target.value)}></input> <br />
+                    Email: <input value={newEmail} onChange={e => setNewEmail(e.target.value)}></input>  <br />
+                    Password: <input type="password" value={newPassword} onChange={ e => setNewPassword(e.target.value)}></input>  <br />
+                    Confirm Password:  <input type="password" value={newConfirmPassword} onChange={ e => setNewConfirmPassword(e.target.value)}></input>
                     {newPassword != newConfirmPassword && newConfirmPassword.length > 0 ? "Password must match" : ""}
                     <br />
-                    Choose your membership plan: I'll figure out options later. <br />
+                   
                     <input type ="submit"></input>
                 </form>
 
