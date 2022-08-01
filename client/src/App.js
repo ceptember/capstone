@@ -58,7 +58,7 @@ function App() {
     });
   }, []);
 
-    // LOGOUT 
+    // LOG IN AND OUT 
 
     function handleLogout(){
       fetch("/logout",{
@@ -68,6 +68,26 @@ function App() {
         setUser(null)
         dispatch(storeUser(null))
       })
+    }
+
+    function submitLogin (e, username, password){
+      e.preventDefault(); 
+      fetch("/login", {
+        method: "POST", 
+        headers: {"Content-Type": "application/json"},
+        body: JSON.stringify({username, password})
+      }).then( (r) => {
+          if (r.ok) {
+            r.json().then((data) => {
+              setUser(data)
+              dispatch(storeUser(data))
+            });
+          } else {
+            r.json().then((err) => {
+              console.log(err)
+            });
+          }
+      }) 
     }
 
   // Current weather 
@@ -141,7 +161,7 @@ function handleWeather(){
     { articles.length > 0 ? articles.map( (x) =>  <Route path={"/articles/"+x.id} key={x.id} > <Article article={x}  /></Route>) : ""} 
     {userFromStore ? userFromStore.username : ""}
     <Route exact path="/"> <Home />  </Route>
-    <Route path="/login"> <Login handleLogout={handleLogout} />  </Route>
+    <Route path="/login"> <Login handleLogout={handleLogout} submitLogin={submitLogin} />  </Route>
     <Route path="/about"><About /> </Route>
     <Route path="/weather"><Weather zip={zipcode} /> </Route>
     <Route path="/games"><Games /></Route>

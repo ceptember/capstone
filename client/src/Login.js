@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 
-function Login ({handleLogout}){
+function Login ({handleLogout, submitLogin}){
 
     //for login
     const [username, setUsername] = useState("")
@@ -24,25 +24,31 @@ function Login ({handleLogout}){
 
     //Login function 
 
-    function submitLogin (e){
+    function handleLogin (e){
         e.preventDefault(); 
-        fetch("/login", {
-          method: "POST", 
-          headers: {"Content-Type": "application/json"},
-          body: JSON.stringify({username, password})
-        }).then( (r) => {
-            if (r.ok) {
-              r.json().then((data) => {
-              //  setUser(data)
-                setUsername("")
-                setPassword("")
-              });
-            } else {
-              r.json().then((err) => {
-                console.log(err)
-              });
-            }
-        }) 
+        // fetch("/login", {
+        //   method: "POST", 
+        //   headers: {"Content-Type": "application/json"},
+        //   body: JSON.stringify({username, password})
+        // }).then( (r) => {
+        //     if (r.ok) {
+        //       r.json().then((data) => {
+        //       //  setUser(data)
+        //         setUsername("")
+        //         setPassword("")
+        //       });
+        //     } else {
+        //       r.json().then((err) => {
+        //         console.log(err)
+        //       });
+        //     }
+        // }) 
+
+        submitLogin(e, username, password)
+
+        setUsername("")
+        setPassword("")
+
       }
 
       // function handleLogout(){
@@ -80,7 +86,7 @@ function Login ({handleLogout}){
         <div>
             {/* <h2>  {user ? "Welcome, " + user.username + "!": ""}</h2> */}
             Existing Users Log In
-            <form onSubmit={e => submitLogin(e)}>
+            <form onSubmit={e => handleLogin(e)}>
                 Username: <input value={username} onChange={ e => setUsername(e.target.value)}></input> <br />
                 Password: <input value={password} onChange={e => setPassword(e.target.value)}></input> <br />
                 forgot password? <br />
