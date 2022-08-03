@@ -2,6 +2,8 @@ import React from "react";
 import {useState, useEffect} from "react"
 
 import Comment from "./Comment";
+import { Link} from "react-router-dom";
+
 
 function Article({article}){
 
@@ -65,9 +67,10 @@ function Article({article}){
 
             {comments ? comments.map( x => <Comment key={x.id} comment_id={x.id} deleteComment={deleteComment} /> ) : ''}
 
+            
             <form onSubmit={e => handleSubmitComment(e)}>
                 <textarea value={newComment} onChange={e => setNewComment(e.target.value)}></textarea>
-                <input type="submit"></input> user: {user ? user.username : ""}
+                { user  ? <input type="submit"></input> : <Link className='' to={"/login"}> log in to comment</Link>}
             </form>
 
         </div>

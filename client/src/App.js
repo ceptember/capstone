@@ -5,6 +5,7 @@ import React from 'react'
 import './App.css';
 import Header from './Header';
 import Home from './Home';
+import News from './News';
 import About from './About';
 import Login from './Login'; 
 import Footer from './Footer';
@@ -20,7 +21,7 @@ import { Link} from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux"; 
 
 //Redux Action Creators
-import { sayBoo } from './features/example/exampleSlice';
+
 import { storeUser } from './features/example/exampleSlice'
 
 function App() {
@@ -161,6 +162,7 @@ function handleWeather(){
     { articles.length > 0 ? articles.map( (x) =>  <Route path={"/articles/"+x.id} key={x.id} > <Article article={x}  /></Route>) : ""} 
     {userFromStore ? userFromStore.username : ""}
     <Route exact path="/"> <Home />  </Route>
+    <Route path="/news"> <News />  </Route>
     <Route path="/login"> <Login handleLogout={handleLogout} submitLogin={submitLogin} />  </Route>
     <Route path="/about"><About /> </Route>
     <Route path="/weather"><Weather zip={zipcode} /> </Route>

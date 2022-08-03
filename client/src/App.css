@@ -36,6 +36,35 @@
   text-align: right;
 }
 
+/* Footer COMPONENT AND ITS CHILD ELEMENTS */
+
+#footer_component{
+  border: 1px solid black; 
+  min-height: 200px; 
+}
+
+/* HOME COMPONENT AND ITS CHILD ELEMENTS */
+
+#home_component {
+  background-color: #DDDDEE;
+}
+
+.headline_container{
+  width: 100%; 
+  min-height: 200px;
+
+  border: 1px solid #000022;
+}
+
+.headline1 {
+
+  float: left; 
+}
+
+.headline1_img{
+  float: left; 
+}
+
 /* COMMENT COMPONENT AND ITS CHILD ELEMENTS */
 .delete-modal{
   display: none;

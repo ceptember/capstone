@@ -10,8 +10,21 @@ function Comment({comment_id, deleteComment}){
     const [canEdit, setCanEdit] = useState(false)
     const [editing, setEditing] = useState(false)
 
-    const userFromStore = useSelector((state) => state.user) //getting this from the store 
-    const usernameFromStore = useSelector((state) => state.user.username) //Sometimes this doesn't load right 
+    const userFromStore = useSelector((state) => state.user) 
+  //  const [usernameFromStore, setUsernameFromStore] = null 
+    const [username, setUsername] = useState("")
+    
+    useEffect(() => {
+        fetch("/me").then((response) => {
+          if (response.ok) {
+            response.json().then((data) => {
+              setUsername(data.username)
+              console.log(data.username)
+            }); 
+          }
+        });
+      }, []);
+
 
     // get comments 
     useEffect( ()=>{
@@ -39,12 +52,12 @@ function Comment({comment_id, deleteComment}){
     return(
         <div className="comment_box">
 
-             { commentUsername == usernameFromStore ? <button onClick={ () => document.querySelector('#modal'+comment_id).style.display="block" } >X</button>: " " }
+             { commentUsername == username? <button onClick={ () => document.querySelector('#modal'+comment_id).style.display="block" } >X</button>: " " }
             {commentObj.comment_text ? commentObj.comment_text : "" }
             <br />
             ~{ commentUsername }
             <br /> 
-            <p> { commentUsername == usernameFromStore ? <button onClick={()=>setEditing(true)}>edit</button>: " " } </p>
+            <p> { commentUsername == username ? <button onClick={()=>setEditing(true)}>edit</button>: " " } </p>
            { editing ? <EditComment comment={commentObj} closeEditForm={closeEditForm} handleEditComment={handleEditComment} /> : ""}
 
             {/* Confirm delete when button clicked */}

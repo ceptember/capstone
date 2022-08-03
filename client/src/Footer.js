@@ -1,6 +1,6 @@
 function Footer () {
     return (
-        <div>
+        <div id="footer_component">
             Footer: 
             List of news categories
             Little blurb about this project and link to About page 
