@@ -1,6 +1,7 @@
 import { useDispatch, useSelector } from "react-redux"; 
 import { storeUser } from './features/example/exampleSlice'
 import { Link} from "react-router-dom";
+import techtimeslogo from './techtimeslogo.PNG'
 
 function Header({currentTemp, currentWeather, city, usState, handleLogout}){
 
@@ -10,20 +11,29 @@ function Header({currentTemp, currentWeather, city, usState, handleLogout}){
     return (
         <div id="header_component">
             
-            <div id= "header-login-logout"> 
-                {userFromStore ? <Link className='' to={"/login"}><button onClick={handleLogout}>log out </button></Link> : <Link className='' to={"/login"}><button> sign up / log in </button></Link>}   
-                <br />
-                {userFromStore ? "Welcome, " + userFromStore.username + "! " : ""} 
+            <div id="header-container1">
+                <span id="header-searchbar"></span>Search bar 
+                <span id= "header-login-logout"> 
+                    {userFromStore ? <Link className='' to={"/login"}><button onClick={handleLogout}>log out </button></Link> : <Link className='' to={"/login"}><button> sign up / log in </button></Link>}   
+                    <br />
+                    {userFromStore ? "Welcome, " + userFromStore.username + "! " : ""} 
+                </span>
             </div>
-            <span>{today.toDateString()}| </span>
-            <span> Weather | </span>
-            <span> Search bar </span>
-            <Link className='' to={"/"}> <h1>The Tech Times</h1> </Link>
-            {currentTemp}°F and {currentWeather} in {city}, {usState}
-            <br />
-            <Link className='' to={"/weather"}> more weather </Link>
+            <div id="header-container2">
+                <div id="header-date">{today.toDateString()} </div>
+                <div id="logo-container"><Link className='' to={"/"}> <img id="header_logo" src={techtimeslogo}></img> </Link></div>
+                <div id="header-weather"> 
+                    {currentTemp}°F and {currentWeather} in {city}, {usState}
+                    <br />
+                    <Link className='' to={"/weather"}> more weather </Link>
+                </div>
+            </div>
+            <div id="header-container3">
+                Nav bar of news categories
+            </div>
             
-            <div> Nav bar of news categories </div>
+          
+          
             
         </div>
     )
