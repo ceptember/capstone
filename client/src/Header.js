@@ -29,7 +29,7 @@ function Header({currentTemp, currentWeather, city, usState, handleLogout}){
                 </div>
             </div>
             <div id="header-container3">
-                Nav bar of news categories
+            <Link className='' to={"/"}>Home</Link> | <Link className='' to={"/news"}>News</Link> | <Link className='' to={"/weather"}>Weather</Link> | <Link className='' to={"/games"}>Games</Link> | <Link className='' to={"/about"}>About</Link>
             </div>
             
           
