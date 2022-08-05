@@ -21,6 +21,29 @@ function Article({article}){
       });
     }, []);
 
+    useEffect( ()=> {
+
+        if (article.authors.length == 1){
+            setAuthors(article.authors[0])
+        }
+
+        else if (article.authors.length == 2){
+            setAuthors(article.authors[0] + " & " + article.authors[1])
+        }
+
+        else if (article.authors.length > 2){
+            let authorsString = ""
+            for (let i = 0; i < (article.authors.length - 1); i++){
+                authorsString = authorsString + article.authors[i] + ", "
+            }
+            authorsString = authorsString + " and " + article.authors[article.authors.length-1]
+
+            setAuthors(authorsString)
+        }
+
+
+    }, [])
+
     function handleSubmitComment(e){
         e.preventDefault()
        
@@ -57,7 +80,8 @@ function Article({article}){
     return (
         <div> 
             <h2>{article.headline}</h2>
-            <h4>by {article.authors.map( a => a +", ")}</h4> 
+            <h4>by {authors}</h4> 
+            <h4>{article.date}</h4>
            
             <br />
 
