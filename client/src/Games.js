@@ -11,7 +11,7 @@ function Games(){
 
     return (
         <div>
-            Games! 
+            <h1>Games</h1> 
             <br />
             <Link to={"/games/wordsearch"}> Word Search </Link> |
             <Link to={"/games/scramble"}> Scramble </Link>
