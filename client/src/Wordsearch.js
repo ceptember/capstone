@@ -60,7 +60,6 @@ function Wordsearch ({words}){
     }
 
 
-
     return (
         <div>
             word search! 
@@ -82,6 +81,10 @@ function Wordsearch ({words}){
                 <tr> { wordSearch[11] ? wordSearch[11].map( (x,i) => <td key={i} onClick={ (e, row, index) => wordSearchGuess(e, 11, i)}>{x}</td>) : "" } </tr>
                 <tr> { wordSearch[12] ? wordSearch[12].map( (x,i) => <td key={i} onClick={ (e, row, index) => wordSearchGuess(e, 12, i)}>{x}</td>) : "" } </tr>
             </table>
+
+            <button className="new_game" onClick={() => window.location.reload(false)}>New Game</button>
+
+
         </div>
     )
 }

@@ -41,8 +41,11 @@ function Scramble({words}){
             if (guess[i] == randomWordObj.word[i] ){
                 lettersArray.push(<div className="scramble_letter scramble_letter_correct">{guess[i]}</div>)
             }
+            else if (!randomWordObj.word.split("").includes(guess[i])){
+                lettersArray.push(<div className="scramble_letter">{guess[i]}</div>)
+            }
             else {
-                lettersArray.push(<div className="scramble_letter">{guess[i]}</div>) 
+                lettersArray.push(<div className="scramble_letter scramble_letter_warm">{guess[i]}</div>) 
             }
         }
         let testArray=testThing
@@ -82,14 +85,14 @@ function Scramble({words}){
                 <input type="text" value={wordGuess} onChange={ (e)=> setWordGuess(e.target.value)}></input>      
                 {gameOver? "" : <input type="submit"></input>}
             </form>
-
-            {gameOver? <button onClick={() => window.location.reload(false)}>New Game</button> : ""}
+            
             {gameOver? "" : guessesLeft + " guesses remaining"}
            <br />
-       
             
             {gameOver ? <h2>{winner}</h2>: ""}
             {gameOver ? <h2>solution: {randomWordObj.word}</h2>: ""}
+            {gameOver? <button className="new_game" onClick={() => window.location.reload(false)}>New Game</button> : ""}
+            <br /><br />
             <div id="guess_holder">
                 <div class="guess">{testThing[0] ? testThing[0].map( x => x) : ""}</div>
                 < br /> <br /><br />

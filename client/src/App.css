@@ -172,6 +172,10 @@ min-height: 180px;
   background-color: rgb(107, 196, 89); 
 }
 
+.scramble_letter_warm {
+  background-color: yellow; 
+}
+
 #guess_holder{
   width: 50%; 
   margin: auto; 
@@ -182,4 +186,12 @@ min-height: 180px;
   overflow: hidden;
   display: inline-block; 
   margin: auto; 
+}
+
+.new_game{
+  background-color: #EEEEFF;
+  width: 100px; 
+  height: 50px; 
+  font-size: 12pt; 
+  border-radius: 4px;
 }
