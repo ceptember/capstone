@@ -66,6 +66,7 @@ function Wordsearch ({words}){
             else {
                 setGameOver(true)
                 setWinner("Better luck next time!")
+                document.querySelector("#wordSearchTable").style.display = 'none'
             }
             
 
