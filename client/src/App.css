@@ -149,7 +149,6 @@ min-height: 180px;
 }
 
 
-
 /* GAMES COMPONENT AND ITS CHILD ELEMENTS */
 
 #scramble_component{
@@ -201,4 +200,10 @@ min-height: 180px;
   margin: auto;
   font-size: 16pt;
    
+}
+
+/* HEADER COMPONENT AND ITS CHILD ELEMENTS */
+.dynamic_span{
+  font-size: 18pt;
+  font-weight:600; 
 }

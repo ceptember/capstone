@@ -1,7 +1,14 @@
 import React from "react";
 import {useState, useEffect} from 'react'
 
-function Weather(){
+// Icons 
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCloudRain } from "@fortawesome/free-solid-svg-icons";
+import { faSun } from "@fortawesome/free-solid-svg-icons";
+import { faCloud } from "@fortawesome/free-solid-svg-icons";
+import { faSnowflake } from "@fortawesome/free-solid-svg-icons";
+
+function Weather({}){
 
     const [searchZip, setSearchZip] = useState('')
     const [zipcode, setZipcode] = useState('10004') 
@@ -23,6 +30,8 @@ function Weather(){
     const [todayLow, setTodayLow] = useState("")
     const [tomorrowHigh, setTomorrowHigh] = useState("")
     const [tomorrowLow, setTomorrowLow] = useState("")
+    const [weatherIcon, setWeatherIcon] = useState("")
+    const [icons, setIcons] = useState("")
 
     useEffect( ()=> {
         fetch('https://ipapi.co/postal')
@@ -49,6 +58,7 @@ function Weather(){
 
     useEffect( () => {
         handleWeather(); 
+
         }, [lat, long])
 
 // lat and long in the API URL come from the handleGeo function that calls the weather callback 
@@ -60,23 +70,30 @@ function handleWeather(){
                 //get weather 
                 let weathercodesNowTodayTomorrow = [weatherData.current_weather.weathercode, weatherData.daily.weathercode[0], weatherData.daily.weathercode[1]]
                 let nowTodayTomorrow = []; 
+                let nowTodayTomorrowIcons = []
                 for (let x of weathercodesNowTodayTomorrow){
                     if ([0, 1, 2].includes(x)){
                         nowTodayTomorrow.push('clear'); 
+                        nowTodayTomorrowIcons.push(<FontAwesomeIcon icon={faSun} style={{color: "orange"}}/>)
                     }
                     else if ([3, 45, 48].includes(x)){
                         nowTodayTomorrow.push('cloudy'); 
+                        nowTodayTomorrowIcons.push( <FontAwesomeIcon icon={faCloud} style={{color: "#555577"}} />)
                     }
                     else if ([51, 53, 55, 56, 57, 61, 63, 65, 66, 67, 80, 81, 82, 95, 96, 99].includes(x)){
                         nowTodayTomorrow.push('rain'); 
+                        nowTodayTomorrowIcons.push(<FontAwesomeIcon icon={faCloudRain} style={{color: "navy"}} />)
+
                     }
                     else if ([71, 73, 75, 77, 85, 86].includes(x)){
                         nowTodayTomorrow.push('snow'); 
+                        nowTodayTomorrowIcons.push(<FontAwesomeIcon icon={faSnowflake} style={{color: "#7799FF"}} />)
                     }
                 }
                 setCurrentWeather(nowTodayTomorrow[0]); 
                 setTodayWeather(nowTodayTomorrow[1]); 
                 setTomorrowWeather(nowTodayTomorrow[2]); 
+                setIcons(nowTodayTomorrowIcons)
 
                 setCurrentTemp(weatherData.current_weather.temperature)
                 setTodayHigh(weatherData.daily.temperature_2m_max[0])
@@ -116,17 +133,14 @@ function handleWeather(){
         setUrlGeo(`https://geocoding-api.open-meteo.com/v1/search?name=${searchZip}`)
         setSearchZip("")
     }
-
  
 
 //use this to search by city 
 //https://geocoding-api.open-meteo.com/v1/search?name=Berlin&count=100
     return(
         <div>
-            Weather Page
-            <br />
-            Search 
-            <br />
+            <h1>Weather</h1>
+           
             Search by Zipcode
         
             <form onSubmit={handleSearchZip}> 
@@ -138,27 +152,23 @@ function handleWeather(){
                 <input id="cityInput" onChange={ (e) => listCities(e)} ></input>
             </form>
            
-            {/* { cityResults ? cityResults.map( x => <li key={x.id}> {x.name}, {x.admin1} { x.postcodes[0] } <button onClick={ () => setUrlGeo(`https://geocoding-api.open-meteo.com/v1/search?name=${x.postcodes[0]}`)} >search {x.postcodes[0]}</button> </li>) : ""} */}
-
-            { cityResults ? cityResults.map( x => <li key={x.id}> {x.name}, {x.admin1} { x.postcodes[0] } <button id={x.postcodes[0]} onClick={ (e) => handleSearchCity(e)} >search {x.postcodes[0]}</button> </li>) : ""}
-
+            { cityResults ? cityResults.map( x => <li key={x.id}> {x.name}, {x.admin1} <button id={x.postcodes[0]} onClick={ (e) => handleSearchCity(e)} >search</button> </li>) : ""}
 
             <br />
-            Showing data for {city}, {usState}, {zipcode}, lat {lat}, long {long}. 
-            <br />
-            
-Current Temperature is {currentTemp}°F
-<br />
-{currentWeather} right now, and {todayWeather} most of the day
-<br />
-
-Today's high: {todayHigh}°F; Today's low: {todayLow}°F
-<br />
-Tomorrow's weather: {tomorrowWeather} with a high of {tomorrowHigh}°F and low of {tomorrowLow}°F 
+            Showing data for:
+            <h2>{city}, {usState} {zipcode} </h2>
+            <h3>Today's weather: </h3>
+The current temperature is <span className="dynamic_span">{currentTemp}°F</span>
+<br /><br />
+<span className="dynamic_span">{currentWeather} {icons[0]} </span>right now, and <span className="dynamic_span">{todayWeather} {icons[1]} </span>most of the day
+<br /><br />
 
 
-            
-         
+Today's high: <span className="dynamic_span">{todayHigh}°F;</span> Today's low: <span className="dynamic_span">{todayLow}°F</span>
+<br />
+<h3>Tomorrow's weather: </h3>
+<span className="dynamic_span">{tomorrowWeather} {icons[2]}</span>  with a high of <span className="dynamic_span">{tomorrowHigh}°F </span> and low of <span className="dynamic_span">{tomorrowLow}°F </span>
+<br /><br /><br />         
         </div>
     )
 }

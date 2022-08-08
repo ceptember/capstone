@@ -94,15 +94,15 @@ function Scramble({words}){
             {gameOver? <button className="new_game" onClick={() => window.location.reload(false)}>New Game</button> : ""}
             <br /><br />
             <div id="guess_holder">
-                <div class="guess">{testThing[0] ? testThing[0].map( x => x) : ""}</div>
+                <div className="guess">{testThing[0] ? testThing[0].map( x => x) : ""}</div>
                 < br /> <br /><br />
-                <div class="guess">{testThing[1] ? testThing[1].map( x => x) : ""}</div>
+                <div className="guess">{testThing[1] ? testThing[1].map( x => x) : ""}</div>
                 < br /> <br /><br />
-                <div class="guess">{testThing[2] ? testThing[2].map( x => x) : ""}</div>
+                <div className="guess">{testThing[2] ? testThing[2].map( x => x) : ""}</div>
                 < br /> <br /><br />
-                <div class="guess">{testThing[3] ? testThing[3].map( x => x) : ""}</div>
+                <div className="guess">{testThing[3] ? testThing[3].map( x => x) : ""}</div>
                 < br /> <br /><br />
-                <div class="guess">{testThing[4] ? testThing[4].map( x => x) : ""}</div>
+                <div className="guess">{testThing[4] ? testThing[4].map( x => x) : ""}</div>
             </div>
         </div>
 

@@ -14,6 +14,13 @@ import Weather from './Weather';
 import Games from './Games';
 import { useEffect, useState } from 'react';
 
+// Icons 
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCloudRain } from "@fortawesome/free-solid-svg-icons";
+import { faSun } from "@fortawesome/free-solid-svg-icons";
+import { faCloud } from "@fortawesome/free-solid-svg-icons";
+import { faSnowflake } from "@fortawesome/free-solid-svg-icons";
+
 
 import { BrowserRouter, Route } from "react-router-dom";
 import { Link} from "react-router-dom";
@@ -102,6 +109,7 @@ function App() {
   const [timezone, setTimezone] = useState("")
   const [city, setCity] = useState("")
   const [usState, setUsState] = useState("")
+  const [weatherIcon, setWeatherIcon] = useState("")
 
 useEffect( ()=> {
   fetch('https://ipapi.co/postal')
@@ -127,7 +135,26 @@ useEffect( ()=> {
 
 useEffect( () => {
     handleWeather(); 
+   
     }, [lat, long])
+
+// icons for weather
+useEffect( ()=> {
+
+      if (currentWeather == "clear" ){
+          setWeatherIcon(<FontAwesomeIcon icon={faSun} style={{color: "orange"}}/>)
+      }
+      else if (currentWeather == "cloudy" ){
+          setWeatherIcon( <FontAwesomeIcon icon={faCloud} style={{color: "#555577"}} />)
+      }
+      else if (currentWeather == "raining" ){
+          setWeatherIcon(<FontAwesomeIcon icon={faCloudRain} style={{color: "navy"}} />)
+      }
+      else if (currentWeather == "snowing" ){
+          setWeatherIcon( <FontAwesomeIcon icon={faSnowflake} style={{color: "#7799FF"}} />)
+      }
+
+  }, [currentWeather])
 
 // lat and long in the API URL come from the handleGeo function that calls the weather callback 
 
@@ -158,14 +185,14 @@ function handleWeather(){
 
   return (
     <div className="App">
-    <Header currentTemp={currentTemp} currentWeather={currentWeather} city={city} usState={usState} handleLogout={handleLogout} />
+    <Header currentTemp={currentTemp} currentWeather={currentWeather} weatherIcon={weatherIcon} city={city} usState={usState} handleLogout={handleLogout} />
     { articles.length > 0 ? articles.map( (x) =>  <Route path={"/articles/"+x.id} key={x.id} > <Article article={x}  /></Route>) : ""} 
     {userFromStore ? userFromStore.username : ""}
     <Route exact path="/"> <Home />  </Route>
     <Route path="/news"> <News />  </Route>
     <Route path="/login"> <Login handleLogout={handleLogout} submitLogin={submitLogin} />  </Route>
     <Route path="/about"><About /> </Route>
-    <Route path="/weather"><Weather zip={zipcode} /> </Route>
+    <Route path="/weather"><Weather zip={zipcode} weatherIcon={weatherIcon} /> </Route>
     <Route path="/games"><Games /></Route>
     <Footer />
 

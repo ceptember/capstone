@@ -11,28 +11,10 @@ import { faSun } from "@fortawesome/free-solid-svg-icons";
 import { faCloud } from "@fortawesome/free-solid-svg-icons";
 import { faSnowflake } from "@fortawesome/free-solid-svg-icons";
 
-function Header({currentTemp, currentWeather, city, usState, handleLogout}){
+function Header({currentTemp, currentWeather, weatherIcon, city, usState, handleLogout}){
 
     const userFromStore = useSelector((state) => state.user) //getting this from the store 
     const today = new Date()
-    const [weatherIcon, setWeatherIcon] = useState("")
-
-    useEffect( ()=> {
-        if (currentWeather = "clear" ){
-            setWeatherIcon(<FontAwesomeIcon icon={faSun} style={{color: "orange"}}/>)
-        }
-        else if (currentWeather = "cloudy" ){
-            setWeatherIcon( <FontAwesomeIcon icon={faCloud} style={{color: "#555577"}} />)
-        }
-        else if (currentWeather = "raining" ){
-            setWeatherIcon(<FontAwesomeIcon icon={faCloudRain} style={{color: "navy"}} />)
-        }
-        else if (currentWeather = "snowing" ){
-            setWeatherIcon( <FontAwesomeIcon icon={faSnowflake} style={{color: "#7799FF"}} />)
-        }
-
-    }, [])
-
 
     return (
         <div id="header_component">
@@ -48,11 +30,9 @@ function Header({currentTemp, currentWeather, city, usState, handleLogout}){
                 <div id="header-date">{today.toDateString()} </div>
                 <div id="logo-container"><Link className='' to={"/"}> <img id="header_logo" src={techtimeslogo}></img> </Link></div>
                 <div id="header-weather"> 
-                    {weatherIcon} {currentTemp}°F in {city}, {usState}
-                    <br />
                     
                     <br />
-                    <Link className='' to={"/weather"}> more weather </Link>
+                    <Link className='' to={"/weather"}> {weatherIcon} {currentTemp}°F in {city}, {usState}</Link>
                 </div>
             </div>
             <div id="header-container3">
