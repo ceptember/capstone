@@ -195,3 +195,10 @@ min-height: 180px;
   font-size: 12pt; 
   border-radius: 4px;
 }
+
+#wordSearchTable{
+  width: 500px; 
+  margin: auto;
+  font-size: 16pt;
+   
+}
