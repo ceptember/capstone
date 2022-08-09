@@ -1,3 +1,19 @@
+/* 
+
+
+#FF5E5B ORange Red
+  #9B3B3A Darker reddish brown 
+#D8D8D8 Light grey
+  #9d9d9d Medium grey
+  #5f5f5f dark grey 
+#FFFFEA Ivory
+#00CECB Robin egg blue
+  #017B79 Darker teal 
+#FFED66 Yellow
+  #B6AA4B Dark gold
+
+*/
+
 /* GLOBAL */
 
 a {
@@ -20,6 +36,7 @@ a:link {
 
 #header_component{
 min-height: 180px;
+border-bottom: 5px double #333; 
 }
 
 #header-container1{
@@ -69,9 +86,6 @@ min-height: 180px;
   width: 20%; 
 }
 
-
-
-
 #header-search-bar{
   text-align: left;
 }
@@ -84,8 +98,14 @@ min-height: 180px;
 /* Footer COMPONENT AND ITS CHILD ELEMENTS */
 
 #footer_component{
-  border: 1px solid black; 
-  min-height: 200px; 
+  background-color: #4f708b; 
+  min-height: 10vh;
+  justify-content: center;
+  color: white;
+  text-align:center; 
+  padding: 20px; 
+  line-height: 22pt;
+
 }
 
 /* HOME COMPONENT AND ITS CHILD ELEMENTS */
@@ -151,8 +171,53 @@ min-height: 180px;
 
 /* GAMES COMPONENT AND ITS CHILD ELEMENTS */
 
-#scramble_component{
 
+
+#games_links_holder{
+  width: 100%; 
+  text-align: center;
+}
+
+.game_cta{
+  width: 250px;
+
+  border: 1px solid black; 
+  border-radius: 5px;
+  margin-right: 10px; 
+  margin-left: 10px; 
+  display: inline-block;
+}
+
+.game_cta_top{
+
+  height: 120px; 
+  padding-top: 75px; 
+  font-family: 'Roboto Slab', serif; 
+  font-size: 18pt; 
+  font-weight: 900;
+}
+
+#word_search_cta_top{
+  background-color: #00CECB;
+}
+
+#scramble_cta_top{
+  background-color: #FFED66;
+}
+
+.play_button{
+  border: 1px solid #ffff;
+  padding: 10px; 
+  border-radius: 10px;
+  background-color: #D8D8D8;
+
+
+}
+
+@media only screen and (max-width: 600px) {
+  .game_cta {
+    width: 100%
+  }
 }
 
 .scramble_letter{
@@ -199,6 +264,9 @@ min-height: 180px;
   width: 500px; 
   margin: auto;
   font-size: 16pt;
+  border: 2px solid #999; 
+  border-radius: 5px;
+  padding: 20px; 
    
 }
 

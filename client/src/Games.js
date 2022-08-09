@@ -11,12 +11,33 @@ function Games(){
 
     return (
         <div>
-            <h1>Games</h1> 
+            <Link to={"/games/"}> <h1>Games</h1> </Link>
             <br />
-            <Link to={"/games/wordsearch"}> Word Search </Link> |
-            <Link to={"/games/scramble"}> Scramble </Link>
-            <br />
-          
+
+
+            <Route exact path="/games/"> 
+                <div id="games_links_holder">
+                <Link to={"/games/wordsearch"}> 
+                    <div  className="game_cta">
+                        <div className="game_cta_top" id="word_search_cta_top">Word Search  </div> 
+                        <div>
+                            
+                            
+                        </div>
+                    </div> 
+                </Link>
+                <Link to={"/games/scramble"}> 
+                    <div className="game_cta">
+                    <div className="game_cta_top" id="scramble_cta_top">Scramble </div>  
+                    <div>
+                       
+                       
+                    </div>
+                    </div>
+                </Link>
+                </div>
+                <br />
+            </Route>
             <Route path="/games/scramble"><Scramble words={words}/></Route>
             <Route path="/games/wordsearch"><Wordsearch words={words}/></Route>
 

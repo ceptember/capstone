@@ -160,7 +160,7 @@ function handleWeather(){
             <h3>Today's weather: </h3>
 The current temperature is <span className="dynamic_span">{currentTemp}°F</span>
 <br /><br />
-<span className="dynamic_span">{currentWeather} {icons[0]} </span>right now, and <span className="dynamic_span">{todayWeather} {icons[1]} </span>most of the day
+<span className="dynamic_span">{currentWeather} {icons[0]} </span>right now, and <span className="dynamic_span">{todayWeather} {icons[1]} </span> today
 <br /><br />
 
 
