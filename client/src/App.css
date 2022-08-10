@@ -16,10 +16,30 @@
 
 /* GLOBAL */
 
-a {
-  color: black; 
+body {
+  color: #ddd;
+  background-color: #222;
 }
 
+a {
+  color: #ddd; 
+  
+}
+
+a:link {
+  color: #ddd; 
+}
+
+
+input{
+  border-radius: 5px;
+}
+
+hr {
+  border: 1px solid #333; 
+  width: 80%;
+ 
+}
 
 a:link {
   text-decoration: none;
@@ -30,9 +50,26 @@ a:link {
   text-align: center;
 }
 
+button{
+  background-color: #01e2de;
+  color:#025d5b;
+  border: 1px solid #017B79; 
+  padding-top:5px;
+  padding-bottom: 5px;
+  border-radius:5px;
+  font-size: 11pt;
 
+
+}
 
 /* HEADER COMPONENT AND ITS CHILD ELEMENTS */
+
+#main_header{
+  font-family: 'Roboto Slab', serif; 
+  font-size: 36pt;
+  margin-bottom: 0px;
+  font-weight: 900;
+}
 
 #header_component{
 min-height: 180px;
@@ -111,7 +148,7 @@ border-bottom: 5px double #333;
 /* HOME COMPONENT AND ITS CHILD ELEMENTS */
 
 #home_component {
-  background-color: #DDDDEE;
+  background-color: #333344;
 }
 
 .headline_container{
@@ -131,6 +168,7 @@ border-bottom: 5px double #333;
 }
 
 /* COMMENT COMPONENT AND ITS CHILD ELEMENTS */
+
 .delete-modal{
   display: none;
   position: fixed; /* Stay in place */
@@ -172,29 +210,29 @@ border-bottom: 5px double #333;
 /* GAMES COMPONENT AND ITS CHILD ELEMENTS */
 
 
-
 #games_links_holder{
   width: 100%; 
   text-align: center;
 }
 
-.game_cta{
+.game_card{
   width: 250px;
-
   border: 1px solid black; 
   border-radius: 5px;
   margin-right: 10px; 
   margin-left: 10px; 
   display: inline-block;
+  font-family: 'Roboto Slab', serif; 
+  padding-top: 35px; 
+  height: 150px; 
+  font-size: 18pt; 
+  font-weight: 900;
+  background-color: white;
+  color: #222;
 }
 
 .game_cta_top{
 
-  height: 120px; 
-  padding-top: 75px; 
-  font-family: 'Roboto Slab', serif; 
-  font-size: 18pt; 
-  font-weight: 900;
 }
 
 #word_search_cta_top{
@@ -221,7 +259,7 @@ border-bottom: 5px double #333;
 }
 
 .scramble_letter{
-  background-color: #CCCCFF;
+  background-color: #D8D8D8;
   font-size: 30px;
   border: 2px solid #444; 
   color: #444; 
@@ -270,7 +308,7 @@ border-bottom: 5px double #333;
    
 }
 
-/* HEADER COMPONENT AND ITS CHILD ELEMENTS */
+/* WEATHER COMPONENT AND ITS CHILD ELEMENTS */
 .dynamic_span{
   font-size: 18pt;
   font-weight:600; 
