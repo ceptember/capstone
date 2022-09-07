@@ -78,12 +78,15 @@ function Article({article}){
     }
 
     return (
-        <div> 
+        <div id="article_component"> 
             <h2>{article.headline}</h2>
             <h4>by {authors}</h4> 
             <h4>{article.date}</h4>
-           
-            <br />
+
+            <p className="publication_note">
+                NOTE: This article was originally published on <a href="https://theconversation.com/" target="_blank">The Conversation 🡥</a> under the Creative Commons license, and is republished here per the <a href="https://theconversation.com/us/republishing-guidelines" target="_blank">republishing guidelines 🡥</a>.
+            </p>
+
 
             {article.content.map( x => <p key={x}>{x}</p>)}
     
@@ -91,10 +94,11 @@ function Article({article}){
 
             {comments ? comments.map( x => <Comment key={x.id} comment_id={x.id} deleteComment={deleteComment} /> ) : ''}
 
-            
+            <h3>Post a Comment</h3> 
             <form onSubmit={e => handleSubmitComment(e)}>
-                <textarea value={newComment} onChange={e => setNewComment(e.target.value)}></textarea>
-                { user  ? <input type="submit"></input> : <Link className='' to={"/login"}> log in to comment</Link>}
+                <textarea id="comment_textarea" value={newComment} onChange={e => setNewComment(e.target.value)}></textarea>
+                <br />
+                { user  ? <input type="submit" class="submit_btn"></input> : <Link className='' to={"/login"}> log in to comment</Link>}
             </form>
 
         </div>

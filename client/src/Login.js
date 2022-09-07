@@ -64,21 +64,20 @@ function Login ({handleLogout, submitLogin}){
     }
 
     return (
-        <div>
+        <div class="main_component_holder">
             {/* <h2>  {user ? "Welcome, " + user.username + "!": ""}</h2> */}
-            Existing Users Log In
+            <h3>Existing Users Log In</h3>
             <form onSubmit={e => handleLogin(e)}>
                 Username: <input value={username} onChange={ e => setUsername(e.target.value)}></input> <br />
-                Password: <input value={password} onChange={e => setPassword(e.target.value)}></input> <br />
+                Password: <input type="password" value={password} onChange={e => setPassword(e.target.value)}></input> <br />
                 forgot password? <br />
-                <input type ="submit"></input>
+                <input type ="submit" class="submit_btn"></input>
             </form>
 
-            <button onClick={handleLogout}>Logout</button>
+            {/* <button onClick={handleLogout}>Logout</button> */}
 
-            <br />
-            New Users Sign Up
-            <br />
+            <br /><br />
+            <h3>New Users Sign Up</h3>
 
                 <form onSubmit={e => handleSignup(e)}>
                     Username: <input value={newUsername} onChange={e => setNewUsername(e.target.value)}></input> <br />
@@ -88,8 +87,10 @@ function Login ({handleLogout, submitLogin}){
                     {newPassword != newConfirmPassword && newConfirmPassword.length > 0 ? "Password must match" : ""}
                     <br />
                    
-                    <input type ="submit"></input>
+                    <input type ="submit" class="submit_btn"></input>
                 </form>
+                <br />
+                <br />
 
         </div>
     )

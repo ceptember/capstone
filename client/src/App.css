@@ -7,7 +7,7 @@
   #9d9d9d Medium grey
   #5f5f5f dark grey 
 #FFFFEA Ivory
-#00CECB Robin egg blue
+#00CECB Robin egg blue - change to #9ecccc;
   #017B79 Darker teal 
 #FFED66 Yellow
   #B6AA4B Dark gold
@@ -27,9 +27,12 @@ a {
 }
 
 a:link {
-  color: #ddd; 
+  color: #9ecccc;
 }
 
+.body_link{
+  color: #9ecccc;
+}
 
 input{
   border-radius: 5px;
@@ -51,15 +54,28 @@ a:link {
 }
 
 button{
-  background-color: #01e2de;
-  color:#025d5b;
-  border: 1px solid #017B79; 
+  background-color: #9ecccc;
+  color:#394e4e;
+  border: 1px solid #394e4e;
   padding-top:5px;
   padding-bottom: 5px;
   border-radius:5px;
   font-size: 11pt;
+}
 
+.submit_btn {
+  background-color: #9ecccc;
+  color:#394e4e;
+  border: 1px solid #394e4e;
+  padding-top:5px;
+  padding-bottom: 5px;
+  border-radius:5px;
+  font-size: 11pt;
+}
 
+.main_component_holder{
+  min-height: 65vh;
+  overflow: auto;
 }
 
 /* HEADER COMPONENT AND ITS CHILD ELEMENTS */
@@ -72,7 +88,8 @@ button{
 }
 
 #header_component{
-min-height: 180px;
+/* min-height: 180px; */
+min-height: 200px;
 border-bottom: 5px double #333; 
 }
 
@@ -111,6 +128,7 @@ border-bottom: 5px double #333;
   width: 20%; 
   float: left; 
   text-align: left;
+  padding-left: 10px;
 }
 
 #logo-container{
@@ -121,6 +139,8 @@ border-bottom: 5px double #333;
 #header-weather{
   float: right; 
   width: 20%; 
+  text-align: right;
+  padding-right: 10px;
 }
 
 #header-search-bar{
@@ -129,43 +149,103 @@ border-bottom: 5px double #333;
 
 #header-login-logout{
   float: right; 
+  width:20%;
+  text-align: right;
+  padding-right: 10px;
 }
 
 
 /* Footer COMPONENT AND ITS CHILD ELEMENTS */
 
 #footer_component{
-  background-color: #4f708b; 
-  min-height: 10vh;
+  background-color: #FF5E5B; 
+  min-height: 12vh;
   justify-content: center;
   color: white;
   text-align:center; 
   padding: 20px; 
   line-height: 22pt;
+  padding-top: 6vh;
 
 }
 
 /* HOME COMPONENT AND ITS CHILD ELEMENTS */
 
 #home_component {
-  background-color: #333344;
+ max-width: 1300px;
+ margin: auto;
+ 
 }
 
 .headline_container{
   width: 100%; 
-  min-height: 200px;
-
-  border: 1px solid #000022;
-}
-
-.headline1 {
-
+  min-height: 100px;
   float: left; 
 }
+
+.more_news{
+  width: 100%; 
+  min-height: 50px;
+  float: left; 
+  font-size: 18pt;
+}
+
+.headlines_and_img{
+  /* border: 1px solid pink; */
+  overflow: auto;
+}
+
+.headline_container_vertical{
+  width: 40%; 
+  min-height: 200px;
+  float: left; 
+}
+
+.home_img_holder{
+  width: 50%;
+  height: 50%;
+  float: left;
+  padding: 10px;
+} 
 
 .headline1_img{
   float: left; 
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border: 2px solid #111;
+  border-radius: 5px;
 }
+
+.headline1 {
+  float: left; 
+  text-align: left;
+}
+
+.headline2 {
+  text-align: left;
+  float: left; 
+}
+.headline_style_2 {
+  text-align: left;
+  float: left; 
+  width: 30%;
+  font-size: 10pt;
+}
+.headline4 {
+  width: 32%;
+  float: left; 
+}
+.headline5 {
+  width: 32%;
+  float: left; 
+}
+.headline6 {
+  width: 32%;
+  float: left; 
+}
+
+
 
 /* COMMENT COMPONENT AND ITS CHILD ELEMENTS */
 
@@ -179,16 +259,18 @@ border-bottom: 5px double #333;
   height: 100%; /* Full height */
   overflow: auto; /* Enable scroll if needed */
   background-color: rgb(0,0,0); /* Fallback color */
-  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+  background-color: rgba(0,0,0,0.8); /* Black w/ opacity */
 }
 
 
 .delete-modal-content{
   background-color: #fefefe;
-  margin: 15% auto; /* 15% from the top and centered */
+  margin: 40vh auto; /* 15% from the top and centered */
+  height: 20vh;
   padding: 20px;
   border: 1px solid #888;
-  width: 80%; /* Could be more or less, depending on screen size */
+  width: 20%; 
+  color: #333;
 }
 
 .close {
@@ -199,11 +281,26 @@ border-bottom: 5px double #333;
 }
 
 .comment_box {
-  border: 1px solid black; 
+  width: 600px; 
+  min-height: 100px;
+  padding-top: 20px; 
+  padding-bottom: 20px; 
+ 
+  /* margin: auto;  */
+}
+
+
+
+@media only screen and (max-width: 600px) {
+  .comment_box {
+    width: 270px; 
+    min-height: 100px;
+  }
+}
+
+.comment_edit_box{
   width: 400px; 
   min-height: 100px;
-  padding: 20px; 
-  margin: auto; 
 }
 
 
@@ -236,7 +333,7 @@ border-bottom: 5px double #333;
 }
 
 #word_search_cta_top{
-  background-color: #00CECB;
+  background-color: #9ecccc;;
 }
 
 #scramble_cta_top{
@@ -312,4 +409,30 @@ border-bottom: 5px double #333;
 .dynamic_span{
   font-size: 18pt;
   font-weight:600; 
+}
+
+/* ARTICLE COMPONENT AND ITS CHILD ELEMENTS */
+
+#article_component {
+  max-width: 800px;
+  margin: auto;
+  text-align: left;
+}
+
+#article_component p {
+  font-size:14pt;
+}
+
+#comment_textarea{
+  width: 400px;
+  height: 200px;
+}
+
+.publication_note{
+ 
+  color: #9ecccc;
+}
+
+.publication_note a{
+  color: #9ecc9e;
 }

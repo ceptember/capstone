@@ -79,7 +79,7 @@ function Wordsearch ({words}){
     }
 
     return (
-        <div>
+        <div >
             <h1>Word Search</h1>
             <h3>Find the hidden word in the puzzle</h3>
             <h2>Hint: {randomWordObj.definition}</h2>

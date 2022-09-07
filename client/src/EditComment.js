@@ -35,10 +35,12 @@ function EditComment({comment, closeEditForm, handleEditComment}){
         <div>
             <form onSubmit={ e => submitEdit(e)}> 
                 {/* <input value={comment.comment_text ? comment.comment_text : ""}></input> */}
-                <input value={commentText} onChange={(e)=> setCommentText(e.target.value)}></input>
-                <input type="submit"></input>
+                <input value={commentText} className="comment_edit_box" onChange={(e)=> setCommentText(e.target.value)}></input>
+                <br />
+                <input type="submit" className="submit_btn"></input>
+                <button onClick={cancelEdit}> Cancel </button>
             </form>
-            <button onClick={cancelEdit}> Cancel </button>
+            
         </div>
     )
 }

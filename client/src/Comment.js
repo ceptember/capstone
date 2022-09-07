@@ -52,19 +52,21 @@ function Comment({comment_id, deleteComment}){
     return(
         <div className="comment_box">
 
-             { commentUsername == username? <button onClick={ () => document.querySelector('#modal'+comment_id).style.display="block" } >X</button>: " " }
             {commentObj.comment_text ? commentObj.comment_text : "" }
             <br />
-            ~{ commentUsername }
-            <br /> 
-            <p> { commentUsername == username ? <button onClick={()=>setEditing(true)}>edit</button>: " " } </p>
+            -{ commentUsername }
+            
+            <p> 
+              { commentUsername == username ? <button onClick={()=>setEditing(true)}>edit</button>: " " } 
+              { commentUsername == username? <button onClick={ () => document.querySelector('#modal'+comment_id).style.display="block" } >delete</button>: " " }
+            </p>
            { editing ? <EditComment comment={commentObj} closeEditForm={closeEditForm} handleEditComment={handleEditComment} /> : ""}
 
             {/* Confirm delete when button clicked */}
            <div className="delete-modal" id={"modal"+comment_id} >
                 <div className="delete-modal-content">
                     <span className="close" onClick={ () => document.querySelector('#modal'+comment_id).style.display="none" }>&times;</span>
-                    <p>{commentObj.comment_text ? commentObj.comment_text : "" }</p>
+                    <p>"{commentObj.comment_text ? commentObj.comment_text : "" }"</p>
                     <p>Do you want to delete this comment?</p>
                     <button onClick={handleDeleteComment}>Delete</button><button onClick={ () => document.querySelector('#modal'+comment_id).style.display="none" }>Cancel</button>
                 </div>

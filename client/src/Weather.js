@@ -138,7 +138,7 @@ function handleWeather(){
 //use this to search by city 
 //https://geocoding-api.open-meteo.com/v1/search?name=Berlin&count=100
     return(
-        <div>
+        <div class="main_component_holder">
             <h1>Weather</h1>
            
             Search by Zipcode
