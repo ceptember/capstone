@@ -21,11 +21,11 @@ function Home(){
 
     
     return (
-        <div id="home_component" class="main_component_holder">
+        <div id="home_component" className="main_component_holder">
 
-        <div class="headlines_and_img">
-            <div class="headline_container_vertical">
-                    <div class="headline1">
+        <div className="headlines_and_img">
+            <div className="headline_container_vertical">
+                    <div className="headline1">
                         <h2>{articles[0] ? articles[0].headline : ""}</h2>
             
                         <p>
@@ -34,7 +34,7 @@ function Home(){
                         </p>
                     </div>
 
-                    <div class="headline2">
+                    <div className="headline2">
                         <h3>{articles[1] ? articles[1].headline : ""}</h3>
                         <p>
                             {articles[1] ? articles[1].content[0] : ""} {articles[1] ? articles[1].content[1] : ""}...
@@ -49,9 +49,8 @@ function Home(){
             </div>
         </div>
 
-      
            
-            <div class="headline_container">
+            <div className="headline_container">
             <div className="headline_style_2">
                 <h3>{articles[2] ? articles[2].headline : ""}</h3>
                 <p>   
@@ -77,7 +76,7 @@ function Home(){
             </div>  
             </div>
 
-            <div class="more_news">
+            <div className="more_news">
                 <Link to="/news">More News</Link> 
             </div>  
             

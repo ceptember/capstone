@@ -98,7 +98,7 @@ function Article({article}){
             <form onSubmit={e => handleSubmitComment(e)}>
                 <textarea id="comment_textarea" value={newComment} onChange={e => setNewComment(e.target.value)}></textarea>
                 <br />
-                { user  ? <input type="submit" class="submit_btn"></input> : <Link className='' to={"/login"}> log in to comment</Link>}
+                { user  ? <input type="submit" className="submit_btn"></input> : <Link className='' to={"/login"}> log in to comment</Link>}
             </form>
 
         </div>
