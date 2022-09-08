@@ -78,6 +78,15 @@ button{
   overflow: auto;
 }
 
+@media only screen and (max-width: 800px) {
+  .main_component_holder{
+    min-height: 65vh;
+    overflow: auto;
+    width: 250px;
+    margin: auto;
+  }
+}
+
 /* HEADER COMPONENT AND ITS CHILD ELEMENTS */
 
 #main_header{
@@ -88,17 +97,14 @@ button{
 }
 
 #header_component{
-/* min-height: 180px; */
 min-height: 200px;
 border-bottom: 5px double #333; 
 }
 
 #header-container1{
-
   text-align: left;
   padding-top: 10px; 
   padding-bottom: 10px; 
-  
 }
 
 #header-container2{
@@ -153,6 +159,55 @@ border-bottom: 5px double #333;
   text-align: right;
   padding-right: 10px;
 }
+
+@media only screen and (max-width: 600px) {
+  #header-container1{
+    text-align: center;
+    padding-top: 10px; 
+    padding-bottom: 10px; 
+    width: 100%;
+    float: left;
+   
+  }
+  #header-container2{
+    text-align: center;
+    padding-top: 10px; 
+    padding-bottom: 10px; 
+    width: 100%;
+    float: none;
+    
+  }
+  #header-container3{
+    text-align: center;
+    padding-top: 10px; 
+    padding-bottom: 10px; 
+    width: 100%;
+    float: none;
+  }
+
+  #header-login-logout{
+    float: none;
+    width:20%;
+    margin: auto;
+    text-align: center;
+    padding-right: 10px;
+  }
+
+  #header-date{
+    width: 100%; 
+    float: none; 
+    text-align: center;
+  }
+
+  #header-weather{
+    width: 100%; 
+    float: none; 
+    text-align: center;
+  }
+  
+
+}
+
 
 
 /* Footer COMPONENT AND ITS CHILD ELEMENTS */
