@@ -229,7 +229,6 @@ border-bottom: 5px double #333;
 #home_component {
  max-width: 1300px;
  margin: auto;
- 
 }
 
 .headline_container{
@@ -246,7 +245,6 @@ border-bottom: 5px double #333;
 }
 
 .headlines_and_img{
-  /* border: 1px solid pink; */
   overflow: auto;
 }
 
@@ -287,20 +285,52 @@ border-bottom: 5px double #333;
   width: 30%;
   font-size: 10pt;
 }
-.headline4 {
-  width: 32%;
-  float: left; 
-}
-.headline5 {
-  width: 32%;
-  float: left; 
-}
-.headline6 {
-  width: 32%;
-  float: left; 
-}
 
-
+@media only screen and (max-width: 800px) {
+  .headline_container{
+    width: 100%; 
+    float: none; 
+  }
+  
+  .more_news{
+    width: 100%; 
+    float: none; 
+    font-size: 18pt;
+  }
+  
+  .headlines_and_img{
+    overflow: hidden;
+  }
+  
+  .headline_container_vertical{
+    width: 100%; 
+    float: none; 
+  }
+  
+  .home_img_holder{
+    width: 100%;
+    height: 100%;
+    float: none;
+  } 
+  
+  .headline1_img{
+    float: none; 
+  }
+  
+  .headline1 {
+    float: none; 
+    text-align: left;
+  }
+  
+  .headline2 {
+    text-align: left;
+  }
+  .headline_style_2 {
+    float: none; 
+    width: 100%;
+    font-size: 10pt;
+  }
+}
 
 /* COMMENT COMPONENT AND ITS CHILD ELEMENTS */
 
