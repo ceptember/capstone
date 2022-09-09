@@ -5,11 +5,14 @@ import Article from "./Article";
 import { BrowserRouter, Route } from "react-router-dom";
 import { Link} from "react-router-dom";
 
+import fisheyeCity from "./fisheye_city.png"
+
 function Home(){
 
     const [articles, setArticles] = useState([])
 
     const placeholderImg = "https://images.unsplash.com/photo-1595452767427-0905ad9b036d"
+    const frontPageImg = "https://images.unsplash.com/photo-1526470608268-f674ce90ebd4"
 
     useEffect( ()=>{
         fetch('/articles')
@@ -45,7 +48,9 @@ function Home(){
 
             </div>
             <div className="home_img_holder">
-                <img className="headline1_img" src={placeholderImg} ></img>
+                <img className="headline1_img" src={fisheyeCity} ></img>
+                
+                <p>image credit: Joshua Rawson-Harris on <a href="https://unsplash.com/photos/KRELIShKxTM" target="_blank">Unsplash</a></p>
             </div>
         </div>
 
