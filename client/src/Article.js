@@ -13,6 +13,8 @@ function Article({article}){
 
     const [user, setUser] = useState(null); //this is duplicated, move to store 
 
+    const [commentError, setCommentError] = useState("")
+
     useEffect(() => {
       fetch("/me").then((response) => {
         if (response.ok) {
@@ -58,10 +60,20 @@ function Article({article}){
             headers: {"Content-Type": "application/json"},
             body: JSON.stringify(commentObj)
         })
-            .then(resp => resp.json())
-            .then(data => {
-                setComments([...comments, data])
+            .then(resp => {
+                if (resp.ok){
+                    resp.json().then(data => {
+                        setComments([...comments, data])
+                        setCommentError("")
+                    }) 
+                }
+                else {
+                    setCommentError("invalid comment")
+                }
+                
+            
             }) 
+            
         setNewComment("")
     }
 
@@ -98,7 +110,10 @@ function Article({article}){
             <form onSubmit={e => handleSubmitComment(e)}>
                 <textarea id="comment_textarea" value={newComment} onChange={e => setNewComment(e.target.value)}></textarea>
                 <br />
+                { commentError ? commentError : ""}
+                <br />
                 { user  ? <input type="submit" className="submit_btn"></input> : <Link className='' to={"/login"}> log in to comment</Link>}
+                <br />
             </form>
 
         </div>

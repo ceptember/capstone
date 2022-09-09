@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 
-function Login ({handleLogout, submitLogin}){
+function Login ({handleLogout, submitLogin, loginError}){
 
     //for login
     const [username, setUsername] = useState("")
@@ -11,29 +11,15 @@ function Login ({handleLogout, submitLogin}){
     const [newUsername, setNewUsername ] = useState("")
     const [newPassword, setNewPassword] = useState("")
     const [newConfirmPassword, setNewConfirmPassword] = useState("")
-   
-    //const [user, setUser] = useState(null); //this is duplicated, move to store 
 
-    // useEffect(() => {
-    //   fetch("/me").then((response) => {
-    //     if (response.ok) {
-    //       response.json().then((data) => setUser(data));
-    //     }
-    //   });
-    // }, []);
-
-    //Login function 
+    const [signupError, setSignupError] = useState("")
 
     function handleLogin (e){
         e.preventDefault(); 
-
         submitLogin(e, username, password)
-
         setUsername("")
         setPassword("")
-
       }
-
 
 
     function handleSignup(e){
@@ -51,10 +37,19 @@ function Login ({handleLogout, submitLogin}){
             headers:  { "Content-Type": "application/json"},
             body: JSON.stringify(newUserObj)
         })
-            .then(resp => resp.json())
-            .then(data =>  {
-              console.log(newUserObj)
-              submitLogin(e, newUserObj.username, newUserObj.password)
+            .then(r => {
+                if (r.ok) {
+                    r.json().then((data) =>{
+                        submitLogin(e, newUserObj.username, newUserObj.password)
+                        setSignupError("")
+                    })
+                }
+                else {
+                    r.json().then((err) => {
+                        setSignupError("invalid")
+                      });
+                }
+
             })
 
         setNewEmail("")
@@ -65,17 +60,15 @@ function Login ({handleLogout, submitLogin}){
 
     return (
         <div className="main_component_holder">
-            {/* <h2>  {user ? "Welcome, " + user.username + "!": ""}</h2> */}
+            
             <h3>Existing Users Log In</h3>
             <form onSubmit={e => handleLogin(e)}>
                 Username: <input value={username} onChange={ e => setUsername(e.target.value)}></input> <br />
                 Password: <input type="password" value={password} onChange={e => setPassword(e.target.value)}></input> <br />
-                forgot password? <br />
                 <input type ="submit" className="submit_btn"></input>
+                <br />
+                {loginError ? loginError : ""}
             </form>
-
-            {/* <button onClick={handleLogout}>Logout</button> */}
-
             <br /><br />
             <h3>New Users Sign Up</h3>
 
@@ -88,6 +81,9 @@ function Login ({handleLogout, submitLogin}){
                     <br />
                    
                     <input type ="submit" className="submit_btn"></input>
+                    <br />
+                    {signupError ? signupError : ""}
+                    
                 </form>
                 <br />
                 <br />

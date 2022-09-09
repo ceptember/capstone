@@ -34,6 +34,7 @@ import { storeUser } from './features/example/exampleSlice'
 function App() {
 
   const [articles, setArticles] = useState([])
+  const [loginError, setLoginError] = useState("")
 
   useEffect( ()=>{
       fetch('/articles')
@@ -43,17 +44,12 @@ function App() {
   }, [])
 
 
-// Testing out the redux store 
-  // read from the Redux store
-  // const items = useSelector((state) => state.items);
-  // const thing = useSelector((state) => state.myStateThing) //getting this from the store 
   const userFromStore = useSelector((state) => state.user) //getting this from the store 
 
   const [user, setUser] = useState(null); //change to redux store 
 
   // gives us the dispatch function to send actions to the Redux store
   const dispatch = useDispatch();
-
 
   useEffect(() => {
     fetch("/me").then((response) => {
@@ -88,11 +84,12 @@ function App() {
           if (r.ok) {
             r.json().then((data) => {
               setUser(data)
+              setLoginError("")
               dispatch(storeUser(data))
             });
           } else {
             r.json().then((err) => {
-              console.log(err)
+              setLoginError("invalid username or password")
             });
           }
       }) 
@@ -189,7 +186,7 @@ function handleWeather(){
     { articles.length > 0 ? articles.map( (x) =>  <Route path={"/articles/"+x.id} key={x.id} > <Article article={x}  /></Route>) : ""} 
     <Route exact path="/"> <Home />  </Route>
     <Route path="/news"> <News />  </Route>
-    <Route path="/login"> <Login handleLogout={handleLogout} submitLogin={submitLogin} />  </Route>
+    <Route path="/login"> <Login handleLogout={handleLogout} submitLogin={submitLogin} loginError={loginError} />  </Route>
     <Route path="/about"><About /> </Route>
     <Route path="/weather"><Weather zip={zipcode} weatherIcon={weatherIcon} /> </Route>
     <Route path="/games"><Games /></Route>
