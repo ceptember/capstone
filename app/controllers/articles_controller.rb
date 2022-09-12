@@ -1,6 +1,7 @@
 class ArticlesController < ApplicationController
 
-    skip_before_action :verify_authenticity_token #gahhhhh 
+     # From Stack overflow - It wasn't working without this at one point but now it is:
+    #skip_before_action :verify_authenticity_token 
 
     def index
         articles = Article.all 

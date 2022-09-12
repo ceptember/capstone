@@ -19,7 +19,6 @@ function Comment({comment_id, deleteComment}){
           if (response.ok) {
             response.json().then((data) => {
               setUsername(data.username)
-              console.log(data.username)
             }); 
           }
         });

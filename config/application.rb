@@ -16,9 +16,9 @@ module Capstone
 
     # Use SameSite=Strict for all cookies to help protect against CSRF
     ######
-    #OMG PUT THIS BACK IN WHEN YOU CAN GET IT WORKING
-    #####
-   # config.action_dispatch.cookies_same_site_protection = :strict
+
+    ### I had to take the following out early on, seems to work with it in now:  ~CP
+    config.action_dispatch.cookies_same_site_protection = :strict
 
 
     # Configuration for the application, engines, and railties goes here.

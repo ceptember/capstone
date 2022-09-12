@@ -1,6 +1,7 @@
 class UsersController < ApplicationController
 
-  skip_before_action :verify_authenticity_token # From Stack overflow - see if it works without this when deployed 
+  # From Stack overflow - It wasn't working without this at one point but now it is:
+  #skip_before_action :verify_authenticity_token 
 
     def index
         render json: {hello: "users!"}
