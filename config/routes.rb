@@ -13,6 +13,8 @@ Rails.application.routes.draw do
   # Defines the root path route ("/")
   # root "articles#index"
 
+  #fallback for deploying to heroku 
   get "*path", to: "fallback#index", constraints: ->(req) { !req.xhr? && req.format.html? }
   
+
 end
