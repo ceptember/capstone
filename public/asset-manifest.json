@@ -1,0 +1,20 @@
+{
+  "files": {
+    "main.css": "/static/css/main.1b9f46a6.css",
+    "main.js": "/static/js/main.295f1711.js",
+    "static/js/787.c4e7f8f9.chunk.js": "/static/js/787.c4e7f8f9.chunk.js",
+    "static/media/fisheye_city.png": "/static/media/fisheye_city.5ad14395f801cb337142.png",
+    "static/media/techtimeslogo.PNG": "/static/media/techtimeslogo.3b3c44cc0049147f493d.PNG",
+    "static/media/wordsearchimg.PNG": "/static/media/wordsearchimg.8a8b67d1dab963fe8a61.PNG",
+    "static/media/scrambleimg.PNG": "/static/media/scrambleimg.42dd70b02116e373df8e.PNG",
+    "static/media/logo.svg": "/static/media/logo.6ce24c58023cc2f8fd88fe9d219db6c6.svg",
+    "index.html": "/index.html",
+    "main.1b9f46a6.css.map": "/static/css/main.1b9f46a6.css.map",
+    "main.295f1711.js.map": "/static/js/main.295f1711.js.map",
+    "787.c4e7f8f9.chunk.js.map": "/static/js/787.c4e7f8f9.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.1b9f46a6.css",
+    "static/js/main.295f1711.js"
+  ]
+}

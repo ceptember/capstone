@@ -23,10 +23,13 @@ body {
 
 a {
   color: #ddd; 
-  
 }
 
 a:link {
+  color: #9ecccc;
+}
+
+a:visited {
   color: #9ecccc;
 }
 
