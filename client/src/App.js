@@ -40,7 +40,7 @@ function App() {
       fetch('/articles')
       .then(resp => resp.json())
       .then(data => { 
-          setArticles(data)})
+          setArticles(data.reverse())}) //Oldest first in db, Newest top of screen! 
   }, [])
 
 

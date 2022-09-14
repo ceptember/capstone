@@ -4,7 +4,7 @@ require 'pry'
 
 class Scraper 
 
-  url = "https://theconversation.com/us/technology/articles"
+  url = "https://theconversation.com/us/technology/articles" # displays most recent 25 articles 
   html = URI.open(url)
   tech_page = Nokogiri::HTML(html)
   $url_list =  tech_page.css('.article--header').css('h2').css('a').map{ |node| "https://theconversation.com" + node.attribute('href').value }
@@ -32,7 +32,7 @@ class Scraper
       date:doc.css('.content-header-container').css(".timestamps").css("time")[0].children[0].text, 
       content: content_array
     }   
-    $articles << article_info
+    $articles.unshift(article_info) # oldest first
   end
 
   def art 

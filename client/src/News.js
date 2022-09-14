@@ -14,7 +14,7 @@ function News(){
         .then(resp => resp.json())
         .then(data => {
              console.log(data[0])   
-            setArticles(data)})
+            setArticles(data.reverse())})//Oldest first in db, Newest top of screen! 
     }, [])
 
     return (
