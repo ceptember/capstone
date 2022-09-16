@@ -25,7 +25,7 @@ function Home(){
     
     return (
         <div id="home_component" className="main_component_holder">
-
+        <h1>Today's Science and Technology Headlines</h1>
         <div className="headlines_and_img">
             <div className="headline_container_vertical">
                     <div className="headline1">

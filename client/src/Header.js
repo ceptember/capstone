@@ -29,8 +29,10 @@ function Header({currentTemp, currentWeather, weatherIcon, city, usState, handle
             <div id="header-container2">
                 <div id="header-date">{today.toDateString()} </div>
                 <Link className='' to={"/"}> <span id="main_header">The Techie Times</span></Link>
+               
+               
+                
                 <div id="header-weather"> 
-                    
                     <br />
                     <Link className='' to={"/weather"}> {weatherIcon} {currentTemp}°F in {city}, {usState}</Link>
                 </div>
