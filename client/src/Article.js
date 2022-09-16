@@ -4,6 +4,7 @@ import {useState, useEffect} from "react"
 import Comment from "./Comment";
 import { Link} from "react-router-dom";
 
+import { useDispatch, useSelector } from "react-redux"; 
 
 function Article({article}){
 
@@ -11,17 +12,10 @@ function Article({article}){
     const [newComment, setNewComment] = useState("")
     const [comments, setComments] = useState(article.comments)
 
-    const [user, setUser] = useState(null); //this is duplicated, move to store 
+
+    const userFromStore = useSelector((state) => state.user) //getting this from the Redux store 
 
     const [commentError, setCommentError] = useState("")
-
-    useEffect(() => {
-      fetch("/me").then((response) => {
-        if (response.ok) {
-          response.json().then((data) => setUser(data));
-        }
-      });
-    }, []);
 
     useEffect( ()=> {
 
@@ -50,7 +44,7 @@ function Article({article}){
         e.preventDefault()
        
         let commentObj = {
-            user_id: user.id,
+            user_id: userFromStore.id,
             article_id: article.id,
             comment_text: newComment
         }
@@ -112,7 +106,7 @@ function Article({article}){
                 <br />
                 { commentError ? commentError : ""}
                 <br />
-                { user  ? <input type="submit" className="submit_btn"></input> : <Link className='' to={"/login"}> log in to comment</Link>}
+                { userFromStore  ? <input type="submit" className="submit_btn"></input> : <Link className='' to={"/login"}> log in to comment</Link>}
                 <br />
             </form>
 

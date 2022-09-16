@@ -44,18 +44,19 @@ function App() {
   }, [])
 
 
-  const userFromStore = useSelector((state) => state.user) //getting this from the store 
-
-  const [user, setUser] = useState(null); //change to redux store 
+  const userFromStore = useSelector((state) => state.user) //getting this from the Redux store 
 
   // gives us the dispatch function to send actions to the Redux store
   const dispatch = useDispatch();
 
+ // get "/me", to: "users#show" gets the current user from the Session
+ //sets the React state
+ // Dispaches to Redux store 
   useEffect(() => {
-    fetch("/me").then((response) => {
+    fetch("/me").then((response) => { 
       if (response.ok) {
         response.json().then((data) => {
-          setUser(data) 
+          // setUser(data) //switch to Redux
           dispatch(storeUser(data))
         }); 
       }
@@ -69,7 +70,6 @@ function App() {
         method: "DELETE"
       })
      .then( () => {
-        setUser(null)
         dispatch(storeUser(null))
       })
     }
@@ -83,7 +83,6 @@ function App() {
       }).then( (r) => {
           if (r.ok) {
             r.json().then((data) => {
-              setUser(data)
               setLoginError("")
               dispatch(storeUser(data))
             });
@@ -183,6 +182,7 @@ function handleWeather(){
   return (
     <div className="App">
     <Header currentTemp={currentTemp} currentWeather={currentWeather} weatherIcon={weatherIcon} city={city} usState={usState} handleLogout={handleLogout} />
+    
     { articles.length > 0 ? articles.map( (x) =>  <Route path={"/articles/"+x.id} key={x.id} > <Article article={x}  /></Route>) : ""} 
     <Route exact path="/"> <Home />  </Route>
     <Route path="/news"> <News />  </Route>

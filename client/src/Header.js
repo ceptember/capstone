@@ -13,7 +13,7 @@ import { faSnowflake } from "@fortawesome/free-solid-svg-icons";
 
 function Header({currentTemp, currentWeather, weatherIcon, city, usState, handleLogout}){
 
-    const userFromStore = useSelector((state) => state.user) //getting this from the store 
+    const userFromStore = useSelector((state) => state.user) //getting this from the Redux store 
     const today = new Date()
 
     return (
