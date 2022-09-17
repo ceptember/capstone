@@ -1,0 +1,2 @@
+module GameWordsHelper
+end

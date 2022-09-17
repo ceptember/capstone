@@ -12,24 +12,29 @@ function Scramble({words}){
     const [testThing, setTestThing] = useState([])
     const [winner, setWinner] = useState("you lose")
 
+
     useEffect( () => {
         setRandomWordObj(words[Math.floor(words.length * Math.random())])
-    },[])
+    },[words])
 
     useEffect( ()=> {
-        let scrambled = []
-        let remaining = randomWordObj.word.split("") 
+        
+        if(randomWordObj){
 
-        for (let i = 0; i < randomWordObj.word.length; i++){
-            let randomIndex = Math.floor(Math.random() * remaining.length)
-            let randomLetter = remaining[randomIndex]
-            scrambled.push(randomLetter)
-           
-            let previous = [...remaining]
-            remaining = [...previous.slice(0,randomIndex), ...previous.slice(randomIndex+1)]
+            let scrambled = []
+
+            let remaining = randomWordObj.word.split("") 
+
+            for (let i = 0; i < randomWordObj.word.length; i++){
+                let randomIndex = Math.floor(Math.random() * remaining.length)
+                let randomLetter = remaining[randomIndex]
+                scrambled.push(randomLetter)
+            
+                let previous = [...remaining]
+                remaining = [...previous.slice(0,randomIndex), ...previous.slice(randomIndex+1)]
+            }
+            setScrambledWord(scrambled.join(""))
         }
-        setScrambledWord(scrambled.join(""))
-
     }, [randomWordObj])
 
     function guessWord(e){

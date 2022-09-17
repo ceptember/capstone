@@ -1,0 +1,3 @@
+class GameWord < ApplicationRecord
+   
+end

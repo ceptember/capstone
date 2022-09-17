@@ -15,44 +15,46 @@ function Wordsearch ({words}){
 
     useEffect( () => {
         setRandomWordObj(words[Math.floor(words.length * Math.random())])
-    },[])
+    },[words])
 
     // Create the word search 
     useEffect( ()=> {
-        const upper = randomWordObj.word.toUpperCase()
-        const wordArray = upper.split("")
-        const searchBoard = []
+        if (randomWordObj){
+            const upper = randomWordObj.word.toUpperCase()
+            const wordArray = upper.split("")
+            const searchBoard = []
 
-        // First fill in the board with random letters 
-        for (let i = 0; i <= 8; i++){ //for each row, create a [] row, then the inner loop creates each cell
-            let row = []; 
-            for (let j = 0; j <= 12; j++){
-                row.push(alphabet[Math.floor(Math.random() * 26)])
+            // First fill in the board with random letters 
+            for (let i = 0; i <= 8; i++){ //for each row, create a [] row, then the inner loop creates each cell
+                let row = []; 
+                for (let j = 0; j <= 12; j++){
+                    row.push(alphabet[Math.floor(Math.random() * 26)])
+                }
+                //out of inner loop 
+                searchBoard.push(row)
             }
-            //out of inner loop 
-            searchBoard.push(row)
-        }
-        //out of both loops
+            //out of both loops
 
-        //Choose a row for the hidden word 
-        let rowNumber = Math.floor(Math.random() * 8)
-        setRowForSearch(rowNumber)
-      //  let wordLetters = randomWordObj.word.split("")
+            //Choose a row for the hidden word 
+            let rowNumber = Math.floor(Math.random() * 8)
+            setRowForSearch(rowNumber)
+        //  let wordLetters = randomWordObj.word.split("")
 
-        let startIndex = Math.floor(Math.random() * (14 - wordArray.length))
-        setIndexForSearch(startIndex)
+            let startIndex = Math.floor(Math.random() * (14 - wordArray.length))
+            setIndexForSearch(startIndex)
 
-        let rowWithWord = [...searchBoard[rowNumber].slice(0, startIndex), ...wordArray,...searchBoard[rowNumber].slice(wordArray.length+startIndex)]
+            let rowWithWord = [...searchBoard[rowNumber].slice(0, startIndex), ...wordArray,...searchBoard[rowNumber].slice(wordArray.length+startIndex)]
 
-        let newBoard = [...searchBoard.slice(0, rowNumber), rowWithWord, ...searchBoard.slice(rowNumber+1)]
-        
-      setWordSearch(newBoard)
+            let newBoard = [...searchBoard.slice(0, rowNumber), rowWithWord, ...searchBoard.slice(rowNumber+1)]
+            
+        setWordSearch(newBoard)
 
+    }
     }, [randomWordObj])
 
     // CHECK THE GUESS 
     function wordSearchGuess(e, r, i){
-        
+        if(randomWordObj){
         let lastLetterIndex = indexForSearch+randomWordObj.word.length-1
         if ( r == rowForSearch && (indexForSearch <= i && i <= lastLetterIndex ) ){
             setGameOver(true)
@@ -68,9 +70,8 @@ function Wordsearch ({words}){
                 setWinner("Better luck next time!")
                 document.querySelector("#wordSearchTable").style.display = 'none'
             }
-            
-
         }
+    }
     }
 
     function newGame(){
@@ -82,7 +83,7 @@ function Wordsearch ({words}){
         <div >
             <h1>Word Search</h1>
             <h3>Find the hidden word in the puzzle</h3>
-            <h2>Hint: {randomWordObj.definition}</h2>
+            <h2>Hint: {randomWordObj ? randomWordObj.definition : ""}</h2>
             
             <table id="wordSearchTable">
                 <tr> { wordSearch[0] ? wordSearch[0].map( (x, i) => <td key={i} onClick={ (e, row, index) => wordSearchGuess(e, 0, i)}>{x}</td>) : "" } </tr>
@@ -94,10 +95,7 @@ function Wordsearch ({words}){
                 <tr> { wordSearch[6] ? wordSearch[6].map( (x,i) => <td key={i} onClick={ (e, row, index) => wordSearchGuess(e, 6, i)}>{x}</td>) : "" } </tr>
                 <tr> { wordSearch[7] ? wordSearch[7].map( (x,i) => <td key={i} onClick={ (e, row, index) => wordSearchGuess(e, 7, i)}>{x}</td>) : "" } </tr>
                 <tr> { wordSearch[8] ? wordSearch[8].map( (x,i) => <td key={i} onClick={ (e, row, index) => wordSearchGuess(e, 8, i)}>{x}</td>) : "" } </tr>
-                {/* <tr> { wordSearch[9] ? wordSearch[9].map( (x,i) => <td key={i} onClick={ (e, row, index) => wordSearchGuess(e, 9, i)}>{x}</td>) : "" } </tr>
-                <tr> { wordSearch[10] ? wordSearch[10].map( (x,i) => <td key={i} onClick={ (e, row, index) => wordSearchGuess(e, 10, i)}>{x}</td>) : "" } </tr>
-                <tr> { wordSearch[11] ? wordSearch[11].map( (x,i) => <td key={i} onClick={ (e, row, index) => wordSearchGuess(e, 11, i)}>{x}</td>) : "" } </tr>
-                <tr> { wordSearch[12] ? wordSearch[12].map( (x,i) => <td key={i} onClick={ (e, row, index) => wordSearchGuess(e, 12, i)}>{x}</td>) : "" } </tr> */}
+                
            </table>
            <br />
             {gameOver ? <h1>{randomWordObj.word.toUpperCase()}</h1> : ""}

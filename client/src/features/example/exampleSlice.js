@@ -6,10 +6,8 @@ const initialState = {
   };
   
   // Action Creators 
-  export function sayBoo(saying) {
-    return { type: "ghost/haunt",
-            payload: saying };
-  }
+
+
 
   export function storeUser(user) {
     return { type: "user/login",
@@ -22,17 +20,8 @@ const initialState = {
 
   function exampleReducer(state = initialState, action) {
     switch (action.type) {
-      case "count/increment":
-        return {
-          ...state,
-          items: state.items.concat(state.items.length + 1),
-        };
-
-      case "ghost/haunt":
-        return {
-          ...state, 
-          myStateThing: action.payload
-        }
+      
+   
 
       case "user/login":
         return{
