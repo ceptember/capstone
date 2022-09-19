@@ -41,7 +41,7 @@ function Scramble({words}){
         e.preventDefault()
         // Set up the display of guesses 
         let lettersArray = []
-        let guess = wordGuess
+        let guess = wordGuess.toLowerCase()
         for (let i=0; i < guess.length; i++){
             if (guess[i] == randomWordObj.word[i] ){
                 lettersArray.push(<div className="scramble_letter scramble_letter_correct">{guess[i]}</div>)
@@ -58,7 +58,7 @@ function Scramble({words}){
         setTestThing(testArray) 
 
         //CHECK THE ANSWER 
-            if (wordGuess == randomWordObj.word){
+            if (wordGuess.toLowerCase() == randomWordObj.word.toLowerCase()){
                 console.log("correct")
                 setGameOver(true)
                 setWinner("You Win!")
