@@ -529,6 +529,14 @@ border-bottom: 5px double #333;
     width: 20px; 
     height: 20px; 
   }
+
+  #wordSearchTable{
+    width: 90% ;
+    font-size: 14pt;
+    padding: 10px; 
+  }
+
+
 }
 
 /* WEATHER COMPONENT AND ITS CHILD ELEMENTS */
