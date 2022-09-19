@@ -12,15 +12,14 @@ function News(){
     useEffect( ()=>{
         fetch('/articles')
         .then(resp => resp.json())
-        .then(data => {
-             console.log(data[0])   
+        .then(data => {  
             setArticles(data.reverse())})//Oldest first in db, Newest top of screen! 
     }, [])
 
     return (
         <div id="news_component" className="main_component_holder">
             <h1>Science and Technology News</h1>
-            { articles.length > 0 ? articles.map( (x) =>  <Route path={"/articles/"+x.id} key={x.id} > <Article article={x}  /></Route>) : ""} 
+            { articles.length > 0 ? articles.map( (x) =>  <Route path={"/news/"+x.id} key={x.id} > <Article article={x}  /></Route>) : ""} 
             { articles.length > 0 ? articles.map( x => <ArticlePreview key={x.id} article={x} /> ) : ""} 
 
         </div>

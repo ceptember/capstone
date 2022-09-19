@@ -183,9 +183,10 @@ function handleWeather(){
     <div className="App">
     <Header currentTemp={currentTemp} currentWeather={currentWeather} weatherIcon={weatherIcon} city={city} usState={usState} handleLogout={handleLogout} />
     
-    { articles.length > 0 ? articles.map( (x) =>  <Route path={"/articles/"+x.id} key={x.id} > <Article article={x}  /></Route>) : ""} 
+   
     <Route exact path="/"> <Home />  </Route>
-    <Route path="/news"> <News />  </Route>
+    <Route exact path="/news"> <News />  </Route>
+    { articles.length > 0 ? articles.map( (x) =>  <Route path={"/news/"+x.id} key={x.id} > <Article article={x}  /></Route>) : ""} 
     <Route path="/login"> <Login handleLogout={handleLogout} submitLogin={submitLogin} loginError={loginError} />  </Route>
     <Route path="/about"><About /> </Route>
     <Route path="/weather"><Weather zip={zipcode} weatherIcon={weatherIcon} /> </Route>
