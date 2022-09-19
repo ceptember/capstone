@@ -32,7 +32,7 @@ function Login ({handleLogout, submitLogin, loginError}){
             password_confirmation: newConfirmPassword
         }
 
-        fetch('http://localhost:3000/signup', {
+        fetch('/signup', {
             method: 'POST',
             headers:  { "Content-Type": "application/json"},
             body: JSON.stringify(newUserObj)
