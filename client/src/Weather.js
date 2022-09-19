@@ -33,6 +33,8 @@ function Weather({}){
     const [weatherIcon, setWeatherIcon] = useState("")
     const [icons, setIcons] = useState("")
 
+
+
     useEffect( ()=> {
         fetch('https://ipapi.co/postal')
           .then( resp => resp.text()) //this api gives a plain text response 
@@ -78,11 +80,11 @@ function handleWeather(){
                     }
                     else if ([3, 45, 48].includes(x)){
                         nowTodayTomorrow.push('cloudy'); 
-                        nowTodayTomorrowIcons.push( <FontAwesomeIcon icon={faCloud} style={{color: "#555577"}} />)
+                        nowTodayTomorrowIcons.push( <FontAwesomeIcon icon={faCloud} style={{color: "#7799FF"}} />)
                     }
                     else if ([51, 53, 55, 56, 57, 61, 63, 65, 66, 67, 80, 81, 82, 95, 96, 99].includes(x)){
                         nowTodayTomorrow.push('rain'); 
-                        nowTodayTomorrowIcons.push(<FontAwesomeIcon icon={faCloudRain} style={{color: "navy"}} />)
+                        nowTodayTomorrowIcons.push(<FontAwesomeIcon icon={faCloudRain} style={{color: "#555577"}} />)
 
                     }
                     else if ([71, 73, 75, 77, 85, 86].includes(x)){

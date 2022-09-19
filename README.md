@@ -36,7 +36,7 @@ You may fork and modify this code, in whole or in part. Please provide attributi
 -react-Redux 8.0.2
 -react-router-dom 5.3.0
 
-### Deployment
+### Deploying
  
 This app is configured to be deployed on [https://www.heroku.com/](https://www.heroku.com/). 
 

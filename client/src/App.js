@@ -107,6 +107,7 @@ function App() {
   const [usState, setUsState] = useState("")
   const [weatherIcon, setWeatherIcon] = useState("")
 
+
 useEffect( ()=> {
   fetch('https://ipapi.co/postal')
     .then( resp => resp.text()) //this api gives a plain text response 
@@ -115,6 +116,8 @@ useEffect( ()=> {
       setUrlGeo(`https://geocoding-api.open-meteo.com/v1/search?name=${data}`)
     })
 }, [])
+
+
 
   useEffect( () => {
     fetch (urlGeo)
@@ -141,10 +144,10 @@ useEffect( ()=> {
           setWeatherIcon(<FontAwesomeIcon icon={faSun} style={{color: "orange"}}/>)
       }
       else if (currentWeather == "cloudy" ){
-          setWeatherIcon( <FontAwesomeIcon icon={faCloud} style={{color: "#555577"}} />)
+          setWeatherIcon( <FontAwesomeIcon icon={faCloud} style={{color: "#7799FF"}} />)
       }
       else if (currentWeather == "raining" ){
-          setWeatherIcon(<FontAwesomeIcon icon={faCloudRain} style={{color: "navy"}} />)
+          setWeatherIcon(<FontAwesomeIcon icon={faCloudRain} style={{color: "#555577"}} />)
       }
       else if (currentWeather == "snowing" ){
           setWeatherIcon( <FontAwesomeIcon icon={faSnowflake} style={{color: "#7799FF"}} />)
