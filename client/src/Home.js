@@ -10,9 +10,15 @@ import fisheyeCity from "./fisheye_city.png"
 function Home(){
 
     const [articles, setArticles] = useState([])
+    const [loadStatus, setLoadStatus] = useState("Loading...")
 
     const placeholderImg = "https://images.unsplash.com/photo-1595452767427-0905ad9b036d"
     const frontPageImg = "https://images.unsplash.com/photo-1526470608268-f674ce90ebd4"
+     
+
+    useEffect( () => {
+        setTimeout( () => setLoadStatus("Please Refresh"), 5000)
+    })
 
     useEffect( ()=>{
         fetch('/articles')
@@ -22,10 +28,11 @@ function Home(){
         })
     }, [])
 
+
     
     return (
         <div id="home_component" className="main_component_holder">
-        <h1>Today's Science and Technology Headlines</h1>
+        <h1> {articles[0] ? "Today's Science and Technology Headlines" : loadStatus} </h1>
         <div className="headlines_and_img">
             <div className="headline_container_vertical">
                     <div className="headline1">
